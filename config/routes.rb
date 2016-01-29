@@ -1,5 +1,13 @@
 Rails.application.routes.draw do
 
+  get 'tours/index'
+
+  get 'tours/show'
+
+  get 'tours/new'
+
+  get 'tours/edit'
+
   root to: 'users#new'
 
   resources :users, except: :show
