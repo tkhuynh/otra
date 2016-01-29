@@ -18,7 +18,9 @@ class PerformancesController < ApplicationController
 
   def create
   	if current_user and current_user.type == "Band"
-  		@performance = current_user.performances.new(performance_params)
+  		update_performance_params = performance_params
+  		update_performance_params["status"] = "scheduled"
+  		@performance = current_user.performances.new(update_performance_params)
   		@tour.performances << @performance
   		if @performance.save
   			flash[:notice] = "Success"
