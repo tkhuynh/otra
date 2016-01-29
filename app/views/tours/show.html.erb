@@ -1,0 +1,8 @@
+<h1><%= @tour.name %></h1>
+<h3>Performance:</h3>
+<ul>
+	<% @tour.performances.all.each do |performance| %>
+		<li><%= performance.performance_date %></li>
+	<% end %>
+</ul>
+<%= link_to "Delete This Tour", @tour, method: :delete %>

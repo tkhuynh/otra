@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  status: MyString
+  requester_id: 1
+  performance_date: 2016-01-28
+  location: MyString
+  band_id: 1
+  tour_id: 1
+  host_id: 1
+  agree: false
+
+two:
+  status: MyString
+  requester_id: 1
+  performance_date: 2016-01-28
+  location: MyString
+  band_id: 1
+  tour_id: 1
+  host_id: 1
+  agree: false

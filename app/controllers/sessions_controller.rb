@@ -1,9 +1,9 @@
 class SessionsController < ApplicationController
 	def new
 		#prevent current user to see login page again
-		if current_user.type == "Host"
+		if current_user and current_user.type == "Host"
 			redirect_to host_path(current_user)
-		elsif current_user.type == "Band"
+		elsif current_user and current_user.type == "Band"
 			redirect_to band_path(current_user)
 		end
 	end
