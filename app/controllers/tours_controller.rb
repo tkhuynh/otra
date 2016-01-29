@@ -19,7 +19,6 @@ class ToursController < ApplicationController
   def create
   	if current_user and current_user.type == "Band"
   		@tour = current_user.tours.new(tour_params)
-      byebug
   		if @tour.save 
   			flash[:notice] = "Successfully created a tour."
   			redirect_to tour_path(@tour)
