@@ -1,12 +1,15 @@
 Rails.application.routes.draw do
 
+
+
   root to: 'users#new'
 
   resources :users, except: [:show, :destroy]
   resources :bands, only: :show
   resources :hosts, only: :show
-  resources :tours
-  resources :performances
+  resources :tours do
+    resources :performances, except: [:index, :show]
+  end
 
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'

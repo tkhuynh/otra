@@ -1,3 +1,8 @@
-<h1>Tours#show</h1>
-<p>Find me in app/views/tours/show.html.erb</p>
-<%= link_to "Delete", @tour, method: :delete, data: {comfirm: "Are your sure?"} %>
+<h1><%= @tour.name %></h1>
+<h3>Performance:</h3>
+<ul>
+	<% @tour.performances.all.each do |performance| %>
+		<li><%= performance.performance_date %></li>
+	<% end %>
+</ul>
+<%= link_to "Delete This Tour", @tour, method: :delete %>

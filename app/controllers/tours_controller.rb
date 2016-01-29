@@ -20,7 +20,7 @@ class ToursController < ApplicationController
   		@tour = current_user.tours.new(tour_params)
   		if @tour.save 
   			flash[:notice] = "Successfully created a tour."
-  			redirect_to new_performance_path
+  			redirect_to new_tour_performance_path(@tour)
   		else
   			flash[:errors] = @tour.errors.full_messages.join(", ")
   			render action: :view
