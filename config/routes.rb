@@ -1,18 +1,12 @@
 Rails.application.routes.draw do
 
-  get 'tours/index'
-
-  get 'tours/show'
-
-  get 'tours/new'
-
-  get 'tours/edit'
-
   root to: 'users#new'
 
-  resources :users, except: :show
+  resources :users, except: [:show, :destroy]
   resources :bands, only: :show
   resources :hosts, only: :show
+  resources :tours
+  resources :performances
 
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
