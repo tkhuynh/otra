@@ -1,15 +1,11 @@
-Rails.application.routes.draw do
-
-
+Rails.application.routes.draw do 
 
   root to: 'users#new'
 
   resources :users, except: [:show, :destroy]
   resources :bands, only: :show
   resources :hosts, only: :show
-  resources :tours do
-    resources :performances, except: [:index, :show]
-  end
+  resources :tours
 
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
