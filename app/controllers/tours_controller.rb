@@ -9,6 +9,7 @@ class ToursController < ApplicationController
   def new
   	if current_user and current_user.type == "Band"
   		@tour = Tour.new
+      3.times { @tour.performances.build }
   	else
   		flash[:errors] = "Please login as a band to create tour."
   		redirect_to login_path
@@ -18,9 +19,10 @@ class ToursController < ApplicationController
   def create
   	if current_user and current_user.type == "Band"
   		@tour = current_user.tours.new(tour_params)
+      byebug
   		if @tour.save 
   			flash[:notice] = "Successfully created a tour."
-  			redirect_to new_tour_performance_path(@tour)
+  			redirect_to tour_path(@tour)
   		else
   			flash[:errors] = @tour.errors.full_messages.join(", ")
   			render action: :view
@@ -68,7 +70,7 @@ class ToursController < ApplicationController
 
 private
 	def tour_params
-		params.require(:tour).permit(:name, :band_id)
+		params.require(:tour).permit(:name, :band_id, performances_attributes: [:location, :performance_date])
 	end
 
 	def find_tour
