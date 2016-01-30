@@ -1,7 +1,25 @@
-<strong><%= @show.venue %></strong>	
-<%= @show.show_date %><br>
-<i>Slots to fill: </i><%= @show.slots - @show.performances.count %><br>
-Confirmed bands: <%= @show.performances.count %><br>
-<% @show.performances.all.each do |perf| %>
-	<strong><%= Band.find(perf.band_id).name %></strong>
-<% end %>
+<!-- helper variables -->
+<% all_pending_performances = Performance.all.where(status: "pending") %>
+	<% this_show_pending_performances = all_pending_performances.where(performance_date: @show.show_date) %>
+
+<div class="container">
+	<div class="row">
+		<h1><%= @show.venue %></h1>
+		<div class="col-xs-6">
+			<h3><strong>Location: </strong><%= @show.location %></h3>
+			<h3><strong>Show Date: </strong><%= @show.show_date %></h3>
+			<h4><strong>Total Performances: </strong><%= @show.slots %></h4>
+			<h4><strong>Confirm Performances: </strong><%= @show.performances.count %></h4>
+			<h4><strong>Performances to fill: </strong><%= @show.slots - @show.performances.count %></h4>
+			<% if @show.slots > 0 and current_user.type == "Band" %>
+				<button>Request Performance</button>
+			<% end %>
+		</div>
+		<div class="col-xs-6">
+			<h4>Pending Requested Bands:</h4>
+			<% this_show_pending_performances.each do |pending_perf| %>
+				<p><%= Band.find(pending_perf.band_id).name %></p>
+			<% end %>
+		</div>
+	</div>
+</div>
