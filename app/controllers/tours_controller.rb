@@ -19,13 +19,18 @@ class ToursController < ApplicationController
   def create
   	if current_user and current_user.type == "Band"
   		@tour = current_user.tours.new(tour_params)
-  		if @tour.save 
-  			flash[:notice] = "Successfully created a tour."
-  			redirect_to tour_path(@tour)
-  		else
-  			flash[:errors] = @tour.errors.full_messages.join(", ")
-  			render action: :view
-  		end
+      if tour_params.has_key?("performances_attributes")
+    		if @tour.save
+    			flash[:notice] = "Successfully created a tour."
+    			redirect_to tour_path(@tour)
+    		else
+    			flash[:errors] = @tour.errors.full_messages.join(", ")
+    			render action: :new
+    		end
+      else
+        flash[:errors] = "A tour must have at least one stop."
+        redirect_to new_tour_path
+      end
   	else
   		redirect_to login_path
   	end
