@@ -22,6 +22,21 @@ $(function() {
 		// $(this).prev("input[type=hidden]").value = "1";
 		$(this).hide().prevAll().remove();
 	});
+	$("#add").click(function (e) {
+		var clone_form_index = $(".fields").length + 1;
+		var new_form = $(".fields").last().clone().attr("class", "fields");
+		new_form.find("select").addClass("date_input");
+		new_form.find(".location_label").attr("for", "tour_performances_attributes_" + clone_form_index + "_location");
+    new_form.find(".location_input").attr("id", "tour_performances_attributes_" + clone_form_index + "_location").attr("name", "tour[performances_attributes][" + clone_form_index + "][location]").val("");
+		
+		new_form.find(".date_label").attr("for", "tour_performances_attributes_" + clone_form_index + "_performance_date");
+		new_form.find("select").first().attr("id", "tour_performances_attributes_" + clone_form_index + "_performance_date_1i").attr("name", "tour[performances_attributes][" + clone_form_index + "][performance_date(1i)]");
+		new_form.find("select").first().next().attr("id", "tour_performances_attributes_" + clone_form_index + "_performance_date_2i").attr("name", "tour[performances_attributes][" + clone_form_index + "][performance_date(2i)]");
+		new_form.find("select").last().attr("id", "tour_performances_attributes_" + clone_form_index + "_performance_date_3i").attr("name", "tour[performances_attributes][" + clone_form_index + "][performance_date(3i)]");
+		$(".fields").last().after(new_form);
+		$("#tour_performances_attributes_" + clone_form_index + "_location").focus();
+		e.preventDefault();
+	});
 });
 
 
