@@ -1,0 +1,28 @@
+<div class="container">
+	<div class="row">
+		<div class="col-xs-8 col-xs-offset-2">
+			<%= form_for @user do |f| %>
+				<h3 class="text-center">Edit Info</h3>
+					<div class="form-group">
+						<%=  f.label :name %>
+						<%=  f.text_field :name, class: "form-control" %>
+					</div>
+					<div class="form-group">
+						<%=  f.label :email %>
+						<%=  f.email_field :email, class: "form-control" %>
+					</div>
+					<div class="form-group">
+						<%=  f.label :location %>
+						<%=  f.text_field :location, class: "form-control" %>
+					</div>
+					<div class="form-group">
+						<%=  f.label :about %>
+						<%=  f.text_area :about, rows: 4, class: "form-control" %>
+					</div>
+					<div class="form-group text-center">
+						<%= f.submit "Save changes", class: "btn btn-primary form-control" %>
+					</div>
+			<% end %>
+		</div>
+	</div>
+</div>
