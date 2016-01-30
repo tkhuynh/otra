@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :hosts, only: :show
   resources :tours
   resources :shows
+  resources :performances, only: :index
 
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'

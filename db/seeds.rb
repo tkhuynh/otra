@@ -2,11 +2,11 @@
 
 # Performances
 
-Performance.create(status: "scheduled", requester_id: nil, performance_date: "2016-02-18", location: "San Francisco, CA", band_id: 6, tour_id: 1, host_id: nil, agree: false)
-Performance.create(status: "confirmed", requester_id: 6, performance_date: "2016-02-15", location: "San Diego, CA", band_id: 6, tour_id: 1, host_id: 3, agree: true)
-Performance.create(status: "pending", requester_id: 6, performance_date: "2016-02-17", location: "San Jose, CA", band_id: 6, tour_id: 1, host_id: nil, agree: false)
-Performance.create(status: "confirmed", requester_id: 6, performance_date: "2016-02-19", location: "Sacramento, CA", band_id: 6, tour_id: 1, host_id: 4, agree: true)
-Performance.create(status: "pending", requester_id: 6, performance_date: "2016-02-16", location: "Los Angeles, CA", band_id: 6, tour_id: 1, host_id: nil, agree: false)
+Performance.create(status: "scheduled", requester_id: nil, performance_date: "2016-02-18", location: "San Francisco, CA", band_id: 6, tour_id: 1, host_id: nil, show_id: nil, agree: false)
+Performance.create(status: "confirmed", requester_id: 6, performance_date: "2016-02-15", location: "San Diego, CA", band_id: 6, tour_id: 1, host_id: 3, show_id: 2, agree: true)
+Performance.create(status: "pending", requester_id: 6, performance_date: "2016-02-17", location: "San Jose, CA", band_id: 6, tour_id: 1, host_id: nil, show_id: nil, agree: false)
+Performance.create(status: "confirmed", requester_id: 6, performance_date: "2016-02-19", location: "Sacramento, CA", band_id: 6, tour_id: 1, host_id: 4, show_id: 4, agree: true)
+Performance.create(status: "pending", requester_id: 6, performance_date: "2016-02-16", location: "Los Angeles, CA", band_id: 6, tour_id: 1, host_id: nil, show_id: nil, agree: false)
 
 # Shows
 Show.create(venue:"Joe's Chicken Shack", show_date: "2016-02-18", location: "San Francisco, CA", slots: 3, host_id: 2, booked: false)
