@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  venue: MyString
+  show_date: 2016-01-29
+  location: MyString
+  slots: 1
+  host_id: 1
+  booked: false
+
+two:
+  venue: MyString
+  show_date: 2016-01-29
+  location: MyString
+  slots: 1
+  host_id: 1
+  booked: false

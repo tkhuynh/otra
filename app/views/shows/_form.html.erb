@@ -1,0 +1,22 @@
+<%= form_for @show do |f| %>
+	<h3 class="text-center">Sign Up</h3>
+	<div class="form-group">
+		<%=  f.label :venue %>
+		<%=  f.text_field :venue, class: "form-control" %>
+	</div>
+	<div class="form-group">
+		<%=  f.label :location %>
+		<%=  f.text_field :location, class: "form-control" %>
+	</div>
+	<div class="form-group">
+		<%=  f.label :show_date %>
+		<%=  f.date_field :show_date, class: "form-control" %>
+	</div>
+	<div class="form-group">
+		<%=  f.label :slots, "Number of Performances" %>
+		<%=  f.number_field :slots, value: 1, min: 1, class: "form-control" %>
+	</div>
+	<div class="form-group text-center">
+		<%= f.submit "Save", class: "btn btn-primary form-control" %>
+	</div>
+<% end %>
