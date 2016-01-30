@@ -1,9 +1,13 @@
 <div class="container">
 	<h2><%= @host.name %></h2>
+	<%= link_to "Add Show", new_show_path %>
+	<hr>
 	<ul>
 		<% @host.shows.all.each do |show| %>
-			<li><%= show.venue %> - <%= link_to "View Show", show_path(show.id) %> <%= link_to "Delete", show, method: :delete %></li>
+			<li><strong><%= show.venue %></strong> - <%= show.show_date %> <br>
+			<i>Slots to fill: <%= show.slots %></i><br>
+			<%= link_to "View Show", show_path(show.id) %> <%= link_to "Cancel Show", show, method: :delete %></li>
 		<% end %>
 	</ul>
-	<%= link_to "Add Show", new_show_path %>
+	<hr>
 </div>
