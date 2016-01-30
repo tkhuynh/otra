@@ -15,3 +15,14 @@
 //= require jquery
 //= require bootstrap-sprockets
 //= require_tree .
+
+$(function() {
+	$('body').on('click', '#remove', function(e) {
+		console.log("Clicked!");
+		// $(this).prev("input[type=hidden]").value = "1";
+		$(this).hide().prevAll().remove();
+	});
+});
+
+
+
