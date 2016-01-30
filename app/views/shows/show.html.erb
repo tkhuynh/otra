@@ -1,2 +1,7 @@
-<h1>Shows#show</h1>
-<p>Find me in app/views/shows/show.html.erb</p>
+<strong><%= @show.venue %></strong>	
+<%= @show.show_date %><br>
+<i>Slots to fill: </i><%= @show.slots - @show.performances.count %><br>
+Confirmed bands: <%= @show.performances.count %><br>
+<% @show.performances.all.each do |perf| %>
+	<strong><%= Band.find(perf.band_id).name %></strong>
+<% end %>
