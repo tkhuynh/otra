@@ -1,4 +1,20 @@
 <div class="container">
 	<h2><%= @band.name %></h2>
 	<%= link_to "Add Tour", new_tour_path %>
+	<hr>
+	<h2>
+		Current Tours
+	</h2>
+	<ul>
+		<% @band.tours.all.each do |tour| %>
+			<h3><%= tour.name %></h3>
+			<ul>
+			<% tour.performances.order("performance_date asc").all.each do |perf| %>
+				<li>
+						<%= perf.performance_date %> - <%= perf.location %> - <%= perf.status %>
+				</li>
+				<% end %>
+			</ul>
+	</ul>
+	<% end %>
 </div>
