@@ -18,7 +18,6 @@ class ShowsController < ApplicationController
   def create
   	if current_user and current_user.type == "Host"
   		@show = current_user.shows.new(show_params)
-      byebug
   		if @show.save 
   			flash[:notice] = "Successfully created a show."
   			redirect_to host_path(current_user)
