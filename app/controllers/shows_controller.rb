@@ -1,9 +1,22 @@
 class ShowsController < ApplicationController
 
 	before_action :find_show, only: [:show, :edit, :update, :destroy]
+  before_action :matching_performance, only: :index
 
   def index
-  	@show = Show.all
+    ## need to be working on
+    if current_user and current_user.type == "Band"
+      @shows = []
+      @match_performances.each do |match_performance|
+        b = Show.all.where(location: match_performance.location).where(show_date: match_performance.performance_date)
+        if b.any?
+          @shows << b
+        end
+      end
+      # @shows.uniq! { |show| show.first.id }
+    else
+      redirect_to host_path(current_user)
+    end
   end
 
   def new
@@ -30,11 +43,16 @@ class ShowsController < ApplicationController
   	end
   end
 
-  def show
-  	unless current_user.id == @show.host_id
-  		redirect_to host_path(current_user)
-  	end
-  end
+  # def show
+  #   # if a band, find performance date match show date
+  # 	unless current_user.id == @show.host_id
+  # 		if current_user.type == "Host"
+  #       redirect_to host_path(current_user)
+  #     elsif current_user.type == "Band"
+  #       redirect_to band_path(current_user)
+  #     end
+  # 	end
+  # end
 
   def edit
   	unless current_user.id == @show.host_id
@@ -74,4 +92,16 @@ class ShowsController < ApplicationController
  	def find_show
  		@show = Show.find(params[:id])
  	end
+
+  def matching_performance
+    if current_user and current_user.type == "Band"
+      @match_performances = []
+      Show.all.each do |show|
+        a = current_user.performances.where(location: show.location).where(performance_date: show.show_date)
+        if a.any?
+          @match_performances << current_user.performances.where(location: show.location).where(performance_date: show.show_date) 
+        end
+      end
+    end 
+  end
 end
