@@ -40,6 +40,7 @@ class ShowsController < ApplicationController
   end
 
   def show
+    @pending_performances = Performance.all.where({status: "pending", show_id: @show.id})
     if current_user
       if current_user.type == "Band" and @match_shows.include?(@show)
         @show
@@ -66,15 +67,16 @@ class ShowsController < ApplicationController
   end
 
   def update
+    @pending_performances = Performance.all.where({status: "pending", show_id: @show.id})
     if current_user.type == "Band" and @match_shows.include?(@show)
       @performance = current_user.performances.where(performance_date: @show.show_date)[0]
       @performance.update_attributes({status: "pending", requester_id: current_user.id, show_id: @show.id})
       redirect_to band_path(current_user)
-    elsif current_user.type == "Host" and current_user.id == @show.host_id and @show.slots != 0
-      p = @performance_id
-      byebug # still in progress
-      @show.update_attributes(slots: @show.slots - 1)
-      redirect_to shows_path(@show)
+    # elsif current_user.type == "Host" and current_user.id == @show.host_id and @show.slots != 0
+    #   # a = params[:id]
+    #   # byebug # still in progress
+    #   @show.update_attributes(slots: @show.slots - 1)
+    #   redirect_to shows_path(@show)
     end
   end
 

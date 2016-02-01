@@ -10,6 +10,14 @@ class PerformancesController < ApplicationController
   	# end
   end
 
+  def update
+    performance = Performance.find(params[:id])
+    if current_user and current_user.id != performance.requester_id and performance.status == "pending"
+      performance.update_attributes({status: "confirmed"})
+      redirect_to show_path(performance.show_id)
+    end
+  end
+
   # def new
   # 	if current_user and current_user.type == "Band"
   # 		@performance = Performance.new
