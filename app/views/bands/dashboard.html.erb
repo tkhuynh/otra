@@ -1,0 +1,39 @@
+<div class="container">
+	<div class="row">
+		<div class="col-xs-3">
+			<h1><%= @band.name %></h1>
+		</div>
+		<div class="col-xs-9">
+			<div id="map"></div>
+			<% @band.tours.each do |tour| %>
+				<h2>
+					<%= tour.name %>
+				</h2>
+
+				<div class="row">
+					<div class="col-xs-4">
+						<h3>CONFIRMED SHOWS</h3>
+						<% tour.performances.where(status: 'confirmed').each do |perf| %>
+							<%= perf.performance_date %> - <%= perf.location %> - <%= perf.status %>
+							<br>
+						<% end %>
+					</div>
+					<div class="col-xs-4">
+						<h3>SCHEDULED SHOWS</h3>
+						<% tour.performances.where(status: 'scheduled').each do |perf| %>
+							<%= perf.performance_date %> - <%= perf.location %> - <%= perf.status %>
+							<br>
+						<% end %>
+					</div>
+					<div class="col-xs-4">
+						<h3>PENDING SHOWS</h3>
+						<% tour.performances.where(status: 'pending').each do |perf| %>
+							<%= perf.performance_date %> - <%= perf.location %> - <%= perf.status %>
+							<br>
+						<% end %>
+					</div>
+				</div>
+			<% end %>
+		</div>
+	</div>
+</div>

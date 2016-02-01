@@ -14,3 +14,18 @@
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+html, body, #map {
+	height: 500px;
+	margin: 0px;
+	padding: 0px
+}
+
+.city_stops {
+	autocomplete: false;
+}
+
+.pac-icon {
+  width: 0;
+  background-image: none;
+}
