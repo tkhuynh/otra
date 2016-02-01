@@ -55,16 +55,6 @@ class ShowsController < ApplicationController
       redirect_to signup_path
     end
   end
-  # def show
-  #   # if a band, find performance date match show date
-  # 	unless current_user.id == @show.host_id
-  # 		if current_user.type == "Host"
-  #       redirect_to host_path(current_user)
-  #     elsif current_user.type == "Band"
-  #       redirect_to band_path(current_user)
-  #     end
-  # 	end
-  # end
 
   def edit
   	unless current_user.id == @show.host_id
@@ -75,8 +65,11 @@ class ShowsController < ApplicationController
   def update
     if current_user.type == "Band" and @match_shows.include?(@show)
       @performance = current_user.performances.where(performance_date: @show.show_date)[0]
-      @performance.update_attributes({status: "pending", requester_id: current_user.id})
+      @performance.update_attributes({status: "pending", requester_id: current_user.id, show_id: @show.id})
       redirect_to band_path(current_user)
+    elsif current_user.type == "Host" and current_user.id == @show.host_id and @show.slots != 0
+      @show.update_attributes(slots: @show.slots - 1)
+      redirect_to shows_path(@show)
     end
   	# if current_user.id == @show.host_id
   	# 	if @show.update_attributes(show_params)

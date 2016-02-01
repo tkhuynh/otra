@@ -1,6 +1,6 @@
 <!-- helper variables -->
 <% all_pending_performances = Performance.all.where(status: "pending") %>
-	<% this_show_pending_performances = all_pending_performances.where(performance_date: @show.show_date) %>
+	<% this_show_pending_performances = all_pending_performances.where({performance_date: @show.show_date, location: @show.location, show_id: @show.id}) %>
 
 <div class="container">
 	<div class="row">
@@ -19,6 +19,7 @@
 			<h4>Pending Requested Bands:</h4>
 			<% this_show_pending_performances.each do |pending_perf| %>
 				<p><%= Band.find(pending_perf.band_id).name %></p>
+				<%= link_to "Add to Show", @show, method: :put %>
 			<% end %>
 		</div>
 	</div>
