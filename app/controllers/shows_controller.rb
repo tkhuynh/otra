@@ -72,21 +72,10 @@ class ShowsController < ApplicationController
       redirect_to band_path(current_user)
     elsif current_user.type == "Host" and current_user.id == @show.host_id and @show.slots != 0
       p = @performance_id
-      byebug
-      # @show.update_attributes(slots: @show.slots - 1)
+      byebug # still in progress
+      @show.update_attributes(slots: @show.slots - 1)
       redirect_to shows_path(@show)
     end
-  	# if current_user.id == @show.host_id
-  	# 	if @show.update_attributes(show_params)
-  	# 		flash[:notice] = "Successfully edit the show."
-  	# 		redirect_to host_path(current_user)
-  	# 	else
-  	# 		flash[:errors] = @show.errors.full_messages.join(", ")
-  	# 		redirect_to edit_show_path(@show)
-  	# 	end
-  	# else
-  	# 	redirect_to host_path(current_user)
-  	# end
   end
 
   def destroy
