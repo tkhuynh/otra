@@ -10,6 +10,8 @@
 				<%= f.fields_for :performances do |builder| %>
 					<div class="fields">
 						<div class="form-group">
+							<%= builder.hidden_field :band_id, value: current_user.id %>
+							<%= builder.hidden_field :status, value: "scheduled" %>
 							<%= builder.label :location, "City", class: "location_label control-label" %>
 							<%= builder.text_field :location, class: "location_input form-control city_stops", placeholder: "Enter a city", required: true %>
 						</div>

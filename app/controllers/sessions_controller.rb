@@ -17,7 +17,7 @@ class SessionsController < ApplicationController
 				redirect_to host_path(@user)
 			elsif @user.type == "Band"
 				#after login redirect to Band profil page
-				redirect_to dashboard_path(@user)
+				redirect_to dashboard_path
 			end
 		else
 			flash[:error] = "Incorrect email or password."

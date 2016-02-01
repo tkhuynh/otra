@@ -74,7 +74,7 @@ class ToursController < ApplicationController
 
 private
 	def tour_params
-		params.require(:tour).permit(:name, :band_id, performances_attributes: [:location, :performance_date])
+		params.require(:tour).permit(:name, :band_id, performances_attributes: [:location, :performance_date, :band_id, :status])
 	end
 
 	def find_tour
