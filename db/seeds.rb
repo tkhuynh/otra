@@ -2,25 +2,25 @@
 
 # Performances
 
-Performance.create(status: "scheduled", requester_id: nil, performance_date: "2016-02-18", location: "San Francisco, CA", band_id: 6, tour_id: 1, host_id: nil, show_id: nil, agree: false)
-Performance.create(status: "confirmed", requester_id: 6, performance_date: "2016-02-15", location: "San Diego, CA", band_id: 6, tour_id: 1, host_id: 3, show_id: 2, agree: true)
-Performance.create(status: "pending", requester_id: 6, performance_date: "2016-02-17", location: "San Jose, CA", band_id: 6, tour_id: 1, host_id: nil, show_id: nil, agree: false)
-Performance.create(status: "confirmed", requester_id: 6, performance_date: "2016-02-19", location: "Sacramento, CA", band_id: 6, tour_id: 1, host_id: 4, show_id: 4, agree: true)
-Performance.create(status: "pending", requester_id: 6, performance_date: "2016-02-16", location: "Los Angeles, CA", band_id: 6, tour_id: 1, host_id: nil, show_id: nil, agree: false)
+# Performance.create(status: "scheduled", requester_id: nil, performance_date: "2016-02-18", location: "San Francisco, CA", band_id: 6, tour_id: 1, host_id: nil, show_id: nil, agree: false)
+# Performance.create(status: "confirmed", requester_id: 6, performance_date: "2016-02-15", location: "San Diego, CA", band_id: 6, tour_id: 1, host_id: 3, show_id: 2, agree: true)
+# Performance.create(status: "pending", requester_id: 6, performance_date: "2016-02-17", location: "San Jose, CA", band_id: 6, tour_id: 1, host_id: nil, show_id: nil, agree: false)
+# Performance.create(status: "confirmed", requester_id: 6, performance_date: "2016-02-19", location: "Sacramento, CA", band_id: 6, tour_id: 1, host_id: 4, show_id: 4, agree: true)
+# Performance.create(status: "pending", requester_id: 6, performance_date: "2016-02-16", location: "Los Angeles, CA", band_id: 6, tour_id: 1, host_id: nil, show_id: nil, agree: false)
 
 # Shows
-Show.create(venue:"Joe's Chicken Shack", show_date: "2016-02-18", location: "San Francisco, CA", slots: 3, host_id: 2, booked: false)
-Show.create(venue:"Cowabungalow", show_date: "2016-02-15", location: "San Diego, CA", slots: 5, host_id: 3, booked: false)
-Show.create(venue:"The Terrorarium", show_date: "2016-02-17", location: "San Jose, CA", slots: 2, host_id: 1, booked: false)
-Show.create(venue:"The Cathouse", show_date: "2016-02-19", location: "Sacramento, CA", slots: 4, host_id: 4, booked: false)
-Show.create(venue:"The Wvlf Shaq", show_date: "2016-02-16", location: "Los Angeles, CA", slots: 3, host_id: 5, booked: false)
+# Show.create(venue:"Joe's Chicken Shack", show_date: "2016-02-18", location: "San Francisco, CA", slots: 3, host_id: 2, booked: false)
+# Show.create(venue:"Cowabungalow", show_date: "2016-02-15", location: "San Diego, CA", slots: 5, host_id: 3, booked: false)
+# Show.create(venue:"The Terrorarium", show_date: "2016-02-17", location: "San Jose, CA", slots: 2, host_id: 1, booked: false)
+# Show.create(venue:"The Cathouse", show_date: "2016-02-19", location: "Sacramento, CA", slots: 4, host_id: 4, booked: false)
+# Show.create(venue:"The Wvlf Shaq", show_date: "2016-02-16", location: "Los Angeles, CA", slots: 3, host_id: 5, booked: false)
 
 # Tours
-Tour.create(name:"The Growing Up Tour", band_id: 6)
-Tour.create(name:"Winter Sled Tour", band_id: 7)
-Tour.create(name:"Slow Down Tour", band_id: 8)
-Tour.create(name:"Falling Up Tour", band_id: 8)
-Tour.create(name:"Sidewalk Ends Tour", band_id: 9)
+# Tour.create(name:"The Growing Up Tour", band_id: 6)
+# Tour.create(name:"Winter Sled Tour", band_id: 7)
+# Tour.create(name:"Slow Down Tour", band_id: 8)
+# Tour.create(name:"Falling Up Tour", band_id: 8)
+# Tour.create(name:"Sidewalk Ends Tour", band_id: 9)
 
 # Hosts
 User.create(name: "John", email: "john@john.com", password: "123456", password_confirmation: "123456", about: "Small town venue", location: "San Jose, CA", type: "Host" )
@@ -35,3 +35,7 @@ User.create(name: "Sugar Sticks", email: "ss@ss.com", password: "123456", passwo
 User.create(name: "The Cough Meds", email: "tcm@tcm.com", password: "123456", password_confirmation: "123456", about: "Gangster Rap", location: "San Diego, CA", type: "Band" )
 User.create(name: "Sly Dog", email: "sd@sd.com", password: "123456", password_confirmation: "123456", about: "Smooth Jazz", location: "Sacramento, CA", type: "Band" )  
 User.create(name: "Red Tail", email: "rt@rt.com", password: "123456", password_confirmation: "123456", about: "Your mom's favorite bathtime CD", location: "Los Angeles, CA", type: "Band" )
+
+# Additional
+User.create(name: "Steven", email: "steven@steven.com", password: "123456", password_confirmation: "123456", about: "Bombs shows", location: "San Francisco, CA", type: "Host" )
+User.create(name: "Sugar Soul Sticks", email: "sss@sss.com", password: "123456", password_confirmation: "123456", about: "Pop", location: "San Francisco, CA", type: "Band" )
