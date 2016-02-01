@@ -21,6 +21,10 @@ html, body, #map {
 	padding: 0px
 }
 
+.city_stops {
+	autocomplete: false;
+}
+
 .pac-icon {
   width: 0;
   background-image: none;
