@@ -12,7 +12,7 @@
 			<h4><strong>Confirm Performances: </strong><%= @show.performances.count %></h4>
 			<h4><strong>Performances to fill: </strong><%= @show.slots - @show.performances.count %></h4>
 			<% if @show.slots > 0 and current_user.type == "Band" %>
-				<button>Request Performance</button>
+				<%= link_to "Request Performance", @performance, method: :put %>
 			<% end %>
 		</div>
 		<div class="col-xs-6">

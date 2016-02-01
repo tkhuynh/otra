@@ -1,7 +1,7 @@
 class ShowsController < ApplicationController
 
 	before_action :find_show, only: [:show, :edit, :update, :destroy]
-  before_action :matching_performance, only: [:index, :show]
+  before_action :matching_performance, only: [:index, :show, :update]
 
   def index
     ## need to be working on
@@ -37,11 +37,22 @@ class ShowsController < ApplicationController
   end
 
   def show
-    if current_user and current_user.type == "Band" and @match_shows.include?(@show)
-      @show
+    if current_user
+      if current_user.type == "Band" and @match_shows.include?(@show)
+        @show
+      elsif current_user.type == "Host" and current_user.id == @show.host_id
+        @show
+      else
+        if current_user.type == "Band"
+          flash[:errors] = "You can only find venue in city you have performance."
+          redirect_to band_path(current_user) and return
+        else 
+          flash[:errors] = "You can only view show you created."
+          redirect_to host_path(current_user) and return
+        end
+      end
     else
-      flash[:errors] = "You can only find venue in city you have performance."
-      redirect_to band_path(current_user)
+      redirect_to signup_path
     end
   end
   # def show
@@ -62,17 +73,22 @@ class ShowsController < ApplicationController
   end
 
   def update
-  	if current_user.id == @show.host_id
-  		if @show.update_attributes(show_params)
-  			flash[:notice] = "Successfully edit the show."
-  			redirect_to host_path(current_user)
-  		else
-  			flash[:errors] = @show.errors.full_messages.join(", ")
-  			redirect_to edit_show_path(@show)
-  		end
-  	else
-  		redirect_to host_path(current_user)
-  	end
+    if current_user.type == "Band" and @match_shows.include?(@show)
+      @performance = current_user.performances.where(performance_date: @show.show_date)[0]
+      @performance.update_attributes({status: "pending", requester_id: current_user.id})
+      redirect_to band_path(current_user)
+    end
+  	# if current_user.id == @show.host_id
+  	# 	if @show.update_attributes(show_params)
+  	# 		flash[:notice] = "Successfully edit the show."
+  	# 		redirect_to host_path(current_user)
+  	# 	else
+  	# 		flash[:errors] = @show.errors.full_messages.join(", ")
+  	# 		redirect_to edit_show_path(@show)
+  	# 	end
+  	# else
+  	# 	redirect_to host_path(current_user)
+  	# end
   end
 
   def destroy

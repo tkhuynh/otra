@@ -40,7 +40,7 @@ class PerformancesController < ApplicationController
 #   def edit
 
 #   end
-# private
+private
 
 	def performance_params 
 		params.require(:performance).permit(:requester_id, :performance_date, :location, :band_id, :tour_id, :host_id, :status, :agree)
