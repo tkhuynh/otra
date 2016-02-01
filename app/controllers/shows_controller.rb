@@ -1,19 +1,12 @@
 class ShowsController < ApplicationController
 
 	before_action :find_show, only: [:show, :edit, :update, :destroy]
-  before_action :matching_performance, only: :index
+  before_action :matching_performance, only: [:index, :show]
 
   def index
     ## need to be working on
     if current_user and current_user.type == "Band"
-      @shows = []
-      @match_performances.each do |match_performance|
-        b = Show.all.where(location: match_performance.location).where(show_date: match_performance.performance_date)
-        if b.any?
-          @shows << b
-        end
-      end
-      # @shows.uniq! { |show| show.first.id }
+      @match_shows
     else
       redirect_to host_path(current_user)
     end
@@ -36,13 +29,21 @@ class ShowsController < ApplicationController
   			redirect_to host_path(current_user)
   		else
   			flash[:errors] = @show.errors.full_messages.join(", ")
-  			render action: :view
+  			render action: :new
   		end
   	else
   		redirect_to login_path
   	end
   end
 
+  def show
+    if current_user and current_user.type == "Band" and @match_shows.include?(@show)
+      @show
+    else
+      flash[:errors] = "You can only find venue in city you have performance."
+      redirect_to band_path(current_user)
+    end
+  end
   # def show
   #   # if a band, find performance date match show date
   # 	unless current_user.id == @show.host_id
@@ -95,11 +96,14 @@ class ShowsController < ApplicationController
 
   def matching_performance
     if current_user and current_user.type == "Band"
-      @match_performances = []
-      Show.all.each do |show|
-        a = current_user.performances.where(location: show.location).where(performance_date: show.show_date)
-        if a.any?
-          @match_performances << current_user.performances.where(location: show.location).where(performance_date: show.show_date) 
+      @band_scheduled_performances = current_user.performances.where(status: "scheduled")
+      @match_shows = []
+      @band_scheduled_performances.each do |performance|
+        match_shows = Show.all.where({location: performance.location, show_date: performance.performance_date})
+        if match_shows.any?
+          match_shows.each do |show|
+            @match_shows << show
+          end
         end
       end
     end 

@@ -1,5 +1,6 @@
 <h1>Shows#index</h1>
 <p>Find me in app/views/shows/index.html.erb</p>
-<% @shows.each do |show| %>
-	<h4><%= show.first.venue %> - <%= show.first.show_date %> - <%= show.first.location %> - <%= show.first.id %></h4>
+<% @match_shows.each do |show| %>
+	<h4><%= show.venue %> - <%= show.show_date %> - <%= show.location %> - <%= show.id %></h4>
+	<%= link_to "view", show_path(show) %>
 <% end %>
