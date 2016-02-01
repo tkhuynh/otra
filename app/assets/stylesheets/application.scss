@@ -14,3 +14,14 @@
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+html, body, #map {
+	height: 500px;
+	margin: 0px;
+	padding: 0px
+}
+
+.pac-icon {
+  width: 0;
+  background-image: none;
+}

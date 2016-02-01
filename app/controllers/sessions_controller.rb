@@ -17,7 +17,7 @@ class SessionsController < ApplicationController
 				redirect_to host_path(@user)
 			elsif @user.type == "Band"
 				#after login redirect to Band profil page
-				redirect_to band_path(@user)
+				redirect_to dashboard_path(@user)
 			end
 		else
 			flash[:error] = "Incorrect email or password."
@@ -28,6 +28,6 @@ class SessionsController < ApplicationController
 	def destroy
 		session[:user_id] = nil
 		flash[:notice] = "Successfully logged out."
-		redirect_to root_path
+		redirect_to login_path
 	end
 end

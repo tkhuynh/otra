@@ -35,8 +35,37 @@ $(function() {
 		new_form.find("select").last().attr("id", "tour_performances_attributes_" + clone_form_index + "_performance_date_3i").attr("name", "tour[performances_attributes][" + clone_form_index + "][performance_date(3i)]");
 		$(".fields").last().after(new_form);
 		$("#tour_performances_attributes_" + clone_form_index + "_location").focus();
+		onGeocoder();
 		e.preventDefault();
 	});
+
+	// Geocoder
+	function onGeocoder() {
+		var options = {
+		          types: ['(cities)'],
+		          componentRestrictions: {country: ["usa"]}
+		      };
+		$(".city_stops").geocomplete(options);
+	}
+
+	onGeocoder();
+	
+	
+	// Google Map
+
+	var map;
+	function initialize() {
+		var center = new google.maps.LatLng(41.850033, -87.6500523);
+		map = new google.maps.Map(document.getElementById('map'), {
+			center: center,
+			zoom: 4,
+			mapTypeId: google.maps.MapTypeId.ROADMAP
+		});
+
+		  map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+	}
+
+	google.maps.event.addDomListener(window, 'load', initialize);
 });
 
 
