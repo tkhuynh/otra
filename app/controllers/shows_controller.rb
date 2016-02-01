@@ -4,11 +4,14 @@ class ShowsController < ApplicationController
   before_action :matching_performance, only: [:index, :show, :update]
 
   def index
-    ## need to be working on
-    if current_user and current_user.type == "Band"
+    if current_user and current_user.type == "Band" and @match_shows.any?
       @match_shows
     else
-      redirect_to host_path(current_user)
+      if current_user.type == "Band"
+        redirect_to band_path(current_user)
+      elsif current_user.type == "Host"
+        redirect_to host_path(current_user)
+      end
     end
   end
 
@@ -68,7 +71,9 @@ class ShowsController < ApplicationController
       @performance.update_attributes({status: "pending", requester_id: current_user.id, show_id: @show.id})
       redirect_to band_path(current_user)
     elsif current_user.type == "Host" and current_user.id == @show.host_id and @show.slots != 0
-      @show.update_attributes(slots: @show.slots - 1)
+      p = @performance_id
+      byebug
+      # @show.update_attributes(slots: @show.slots - 1)
       redirect_to shows_path(@show)
     end
   	# if current_user.id == @show.host_id
