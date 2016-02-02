@@ -4,8 +4,7 @@
 		<%=  f.text_field :venue, class: "form-control" %>
 	</div>
 	<div class="form-group">
-		<%=  f.label :location %>
-		<%=  f.text_field :location, class: "form-control" %>
+		<%=  f.hidden_field :location, value: current_user.location %>
 	</div>
 	<div class="form-group">
 		<%=  f.label :show_date %>

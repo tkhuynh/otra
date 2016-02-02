@@ -14,8 +14,8 @@
 					</ul>
 				<% end %>
 			<% end %>
-			<% if @show.slots > 0 and current_user.type == "Band" and @band_request.empty?%>
-				<% if @host_request_for_band.empty? %>
+			<% if @show.slots > @confirmed_requests.count and current_user.type == "Band" and @band_request.empty?%>
+				<% if @host_single_request.empty? %>
 					<%= form_for @request do |f| %>
 						<%= f.hidden_field :status, value: "pending" %>
 						<%= f.hidden_field :requester_id, value: current_user.id %>
@@ -26,7 +26,7 @@
 					<% end %>
 				<% else %>
 					Host already wants you to play this show, <br>
-					<%= link_to "click here", performance_path(@host_request_for_band[0].performance_id) %> to confirm or deny!
+					<%= link_to "click here", performance_path(@host_single_request[0].performance_id) %> to confirm or deny!
 				<% end %>
 			<% end %>
 		</div>
