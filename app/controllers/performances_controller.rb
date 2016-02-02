@@ -13,11 +13,15 @@ class PerformancesController < ApplicationController
   def update
     performance = Performance.find(params[:id])
     request = Request.where({status: "pending", show_id: params[:performance][:show_id], performance_id: performance.id})[0]
-    byebug
     if current_user && current_user.id != request.requester_id && performance.status == "scheduled"
-      performance.update_attributes({status: "confirmed"})
-      request.update_attributes({status: "confirmed"})
-      redirect_to show_path(request.show_id)
+      if params[:commit] == "Confirm"
+        performance.update_attributes({status: "confirmed"})
+        request.update_attributes({status: "confirmed"})
+        redirect_to show_path(request.show_id)
+      elsif params[:commit] == "Deny"
+        request.update_attributes({status: "denied"})
+        redirect_to show_path(request.show_id)
+      end 
     end
   end
 

@@ -35,10 +35,17 @@
 						<%= form_for pending_perf, method: :put do |f| %>
 							<%= f.hidden_field :show_id, value: @show.id %>
 							<%= f.hidden_field :id, value: pending_perf.id %>
-							<%= f.submit "Add" %>
+							<%= f.submit "Confirm" %>
+							<%= f.submit "Deny" %>
 						<% end %>
+					<% elsif current_user.type == "Band" %>
+						<%= request.performance.band.name %>
 					<% end %>
 				<% end %>
+			<% end %>
+
+			<% if @band_request[0].status == "denied" %>
+				<h2>You have been denied by the host.</h2>
 			<% end %>
 		</div>
 	</div>
