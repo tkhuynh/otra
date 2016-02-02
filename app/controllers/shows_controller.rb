@@ -40,9 +40,13 @@ class ShowsController < ApplicationController
   end
 
   def show
-    @pending_performances = Performance.all.where({status: "pending", show_id: @show.id})
+    @request = Request.new
+    @confirmed_requests = Request.where({status: "confirmed", show_id: @show.id})
+    @pending_requests = Request.all.where({status: "pending", show_id: @show.id})
     if current_user
       if current_user.type == "Band" and @match_shows.include?(@show)
+        @band_request = Request.where({requester_id: current_user.id, show_id: @show.id})
+        # byebug
         @show
       elsif current_user.type == "Host" and current_user.id == @show.host_id
         @show
