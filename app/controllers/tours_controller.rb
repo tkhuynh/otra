@@ -18,11 +18,11 @@ class ToursController < ApplicationController
 
   def create
   	if current_user and current_user.type == "Band"
-      update_tour_params = tour_params
-      city = tour_params["performances_attributes"]["2"]["location"]
-      city.sub!(/, United States/, "")
-      update_tour_params[:performances_attributes][0] = city
-      byebug
+      performances_hash = tour_params[:performances_attributes]
+      performances_hash.each {|key, value| 
+        city = value["location"].sub!(/, United States/, "")
+        performances_hash[key]["location"] = city
+      }
   		@tour = current_user.tours.new(tour_params)
       if tour_params.has_key?("performances_attributes")
     		if @tour.save
