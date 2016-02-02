@@ -14,14 +14,19 @@
 					</ul>
 				<% end %>
 			<% end %>
-			<% if @show.slots > 0 and current_user.type == "Band" and @band_request.empty? %>
-				<%= form_for @request do |f| %>
-					<%= f.hidden_field :status, value: "pending" %>
-					<%= f.hidden_field :requester_id, value: current_user.id %>
-					<% this_band_performance = current_user.performances.where({status: "scheduled", performance_date: @show.show_date, location: @show.location})[0] %>
-					<%= f.hidden_field :performance_id, value: this_band_performance.id %>
-					<%= f.hidden_field :show_id, value: @show.id %>
-					<%= f.submit "Request Slot" %>
+			<% if @show.slots > 0 and current_user.type == "Band" and @band_request.empty?%>
+				<% if @host_request_for_band.empty? %>
+					<%= form_for @request do |f| %>
+						<%= f.hidden_field :status, value: "pending" %>
+						<%= f.hidden_field :requester_id, value: current_user.id %>
+						<% this_band_performance = current_user.performances.where({status: "scheduled", performance_date: @show.show_date, location: @show.location})[0] %>
+						<%= f.hidden_field :performance_id, value: this_band_performance.id %>
+						<%= f.hidden_field :show_id, value: @show.id %>
+						<%= f.submit "Request Slot" %>
+					<% end %>
+				<% else %>
+					Host already wants you to play this show, <br>
+					<%= link_to "click here", performance_path(@host_request_for_band[0].performance_id) %> to confirm or deny!
 				<% end %>
 			<% end %>
 		</div>

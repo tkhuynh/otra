@@ -35,14 +35,24 @@ class PerformancesController < ApplicationController
 
 
   def update
+    this_show_id = params[:performance][:show_id]
     performance = Performance.find(params[:id])
-    request = Request.where({status: "pending", show_id: params[:performance][:show_id], performance_id: performance.id})[0]
+    show_confirmed_requests = Request.where({status: "confirmed", show_id: this_show_id})
+    request = Request.where({status: "pending", show_id: this_show_id, performance_id: performance.id})[0]
     if current_user && current_user.id != request.requester_id && performance.status == "scheduled"
       if params[:commit] == "Confirm"
         performance.update_attributes({status: "confirmed"})
         request.update_attributes({status: "confirmed"})
         if current_user.type == "Host"
-          redirect_to show_path(request.show_id)
+          if show_confirmed_requests.count == Show.find(this_show_id).slots
+            show_pending_requests = Request.where({status: "pending", show_id: this_show_id})
+            show_pending_requests.each do |pending_request|
+              pending_request.update_attributes({status: "denied"})
+            end
+            redirect_to show_path(request.show_id)
+          else
+            redirect_to show_path(request.show_id)
+          end
         else
           all_requests = Request.where({performance_id: request.performance_id, status: "pending"})
           all_requests.each do |each_request|

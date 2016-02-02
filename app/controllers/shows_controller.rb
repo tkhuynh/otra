@@ -45,6 +45,7 @@ class ShowsController < ApplicationController
     @pending_requests = Request.all.where({status: "pending", show_id: @show.id})
     if current_user
       if current_user.type == "Band" and @match_shows.include?(@show)
+        @host_request_for_band = Request.where({requester_id: @show.host.id, show_id: @show.id, status: "pending"})
         @band_request = Request.where({requester_id: current_user.id, show_id: @show.id})
         @show
       elsif current_user.type == "Host" and current_user.id == @show.host_id
