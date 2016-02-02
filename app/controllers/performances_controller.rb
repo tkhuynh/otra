@@ -48,13 +48,18 @@ class PerformancesController < ApplicationController
           all_requests.each do |each_request|
             each_request.update_attributes({status: "denied"})
           end
-          byebug
           flash[:notice] = "Performance on " + performance.performance_date.to_s + " will be at " + request.show.venue
           redirect_to dashboard_path
         end
       elsif params[:commit] == "Deny"
-        request.update_attributes({status: "denied"})
-        redirect_to show_path(request.show_id)
+        if current_user.type == "Host"
+          request.update_attributes({status: "denied"})
+          redirect_to show_path(request.show_id)
+        else
+          flash[:notice] = "You have denied a request from " + request.show.venue
+          request.update_attributes({status: "denied"})
+          redirect_to performance_path(performance)
+        end
       end 
     end
   end

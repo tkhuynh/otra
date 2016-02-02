@@ -21,7 +21,7 @@
 					<div class="col-xs-4">
 						<h3>CONFIRMED SHOWS</h3>
 						<% tour.performances.where(status: 'confirmed').each do |perf| %>
-							<%= perf.performance_date %> - <%= perf.location %> - <%= perf.status %>
+							<%= link_to perf.performance_date, performance_path(perf) %> - <%= perf.location %> - <%= perf.status %>
 							<br>
 						<% end %>
 					</div>
