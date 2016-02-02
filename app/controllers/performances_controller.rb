@@ -9,7 +9,7 @@ class PerformancesController < ApplicationController
 
   def show
     @request = Request.new
-    @confirmed_requests = Request.where({status: "confirmed", performance_id: @performance.id})
+    @confirmed_request = Request.where({status: "confirmed", performance_id: @performance.id})[0]
     @pending_requests = Request.all.where({status: "pending", performance_id: @performance.id})
     if current_user
       if current_user.type == "Host" and @match_performances.include?(@performance)
@@ -41,7 +41,17 @@ class PerformancesController < ApplicationController
       if params[:commit] == "Confirm"
         performance.update_attributes({status: "confirmed"})
         request.update_attributes({status: "confirmed"})
-        redirect_to show_path(request.show_id)
+        if current_user.type == "Host"
+          redirect_to show_path(request.show_id)
+        else
+          all_requests = Request.where({performance_id: request.performance_id, status: "pending"})
+          all_requests.each do |each_request|
+            each_request.update_attributes({status: "denied"})
+          end
+          byebug
+          flash[:notice] = "Performance on " + performance.performance_date.to_s + " will be at " + request.show.venue
+          redirect_to dashboard_path
+        end
       elsif params[:commit] == "Deny"
         request.update_attributes({status: "denied"})
         redirect_to show_path(request.show_id)
