@@ -35,25 +35,25 @@ $(function() {
 		new_form.find("select").last().attr("id", "tour_performances_attributes_" + clone_form_index + "_performance_date_3i").attr("name", "tour[performances_attributes][" + clone_form_index + "][performance_date(3i)]");
 		$(".fields").last().after(new_form);
 		$("#tour_performances_attributes_" + clone_form_index + "_location").focus();
-		onGeocoder();
+		onGeocomplete();
 		e.preventDefault();
 	});
 
-	// Geocoder
-	function onGeocoder() {
+	// Geocomplete
+	function onGeocomplete() {
 		var options = {
 		          types: ['(cities)'],
-		          componentRestrictions: {country: ["usa"]}
+		          componentRestrictions: {country: "usa"}
 		      };
 		$(".city_stops").geocomplete(options);
 	}
 
-	onGeocoder();
-	
+	onGeocomplete();
 	
 	// Google Map
-
+	var geocoder;
 	var map;
+	geocoder = new google.maps.Geocoder();
 	function initialize() {
 		var center = new google.maps.LatLng(41.850033, -87.6500523);
 		map = new google.maps.Map(document.getElementById('map'), {
@@ -62,7 +62,24 @@ $(function() {
 			mapTypeId: google.maps.MapTypeId.ROADMAP
 		});
 
-		  map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+		$.get("/performances.json", function(data) {
+			data.forEach(function (city) {
+				var cityName = city.location;
+				if (cityName !== undefined) {
+					geocoder.geocode({'address': cityName}, function(results, status) {
+						var latitude = results[0].geometry.location.lat();
+						var longitude = results[0].geometry.location.lng(); 
+						tour_stops_coordinates.push([latitude, longitude]);
+						var marker = new google.maps.Marker({
+							position: new google.maps.LatLng(latitude, longitude),
+							map: map,
+							title: 'Start date - ' + city.performance_date,
+							icon: 'http://icons.iconarchive.com/icons/glyphish/glyphish/32/07-map-marker-icon.png'
+						});
+					});
+				}
+			});
+		});
 	}
 
 	google.maps.event.addDomListener(window, 'load', initialize);
