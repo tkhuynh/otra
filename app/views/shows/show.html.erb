@@ -1,7 +1,7 @@
 <div class="container">
 	<div class="row">
 		<h1><%= @show.venue %></h1>
-		<div class="col-xs-6">
+		<div class="col-xs-4">
 			<h3><strong>Location: </strong><%= @show.location %></h3>
 			<h3><strong>Show Date: </strong><%= @show.show_date %></h3>
 			<h4><strong>Total Slots: </strong><%= @show.slots %></h4>
@@ -25,26 +25,29 @@
 				<% end %>
 			<% end %>
 		</div>
-		<div class="col-xs-6">
+		<div class="col-xs-8">
 			<% if @pending_requests.any? %>
 				<h4>Pending Requested Bands:</h4>
 				<% @pending_requests.each do |request| %>
 					<% pending_perf = request.performance %>
 					<% if current_user.type == "Host" and request.status == "pending" and pending_perf.status == "scheduled" %>
-						<%= request.performance.band.name %>
-						<%= form_for pending_perf, method: :put do |f| %>
-							<%= f.hidden_field :show_id, value: @show.id %>
-							<%= f.hidden_field :id, value: pending_perf.id %>
-							<%= f.submit "Confirm" %>
-							<%= f.submit "Deny" %>
+						<% if request.requester_id == current_user.id  %>
+							<p><i>Your request with </i><%= request.performance.band.name %><i> is pending</i></p>
+						<% else %>
+							<%= request.performance.band.name %>
+							<%= form_for pending_perf, method: :put do |f| %>
+								<%= f.hidden_field :show_id, value: @show.id %>
+								<%= f.hidden_field :id, value: pending_perf.id %>
+								<%= f.submit "Confirm" %>
+								<%= f.submit "Deny" %>
+							<% end %>
 						<% end %>
 					<% elsif current_user.type == "Band" %>
 						<%= request.performance.band.name %>
 					<% end %>
 				<% end %>
 			<% end %>
-
-			<% if @band_request[0].status == "denied" %>
+			<% if current_user.type == "Band" and @band_request.any? and @band_request[0].status == "denied" %>
 				<h2>You have been denied by the host.</h2>
 			<% end %>
 		</div>

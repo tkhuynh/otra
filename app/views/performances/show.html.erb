@@ -1,0 +1,42 @@
+<div class="container">
+	<div class="row">
+		<h1><%= @performance.band.name %></h1>
+		<div class="col-xs-6">
+			<h2><%= @performance.performance_date %></h2>
+			<% if @confirmed_request %>
+				<p><strong>Location: </strong><%= @confirmed_request.show.venue %> - <%=  @performance.location %></p>
+			<% end %>
+			<% if current_user.type == "Host" and @host_request.empty? %>
+				<%= form_for @request do |f| %>
+					<%= f.hidden_field :status, value: "pending" %>
+					<%= f.hidden_field :requester_id, value: current_user.id %>
+					<% this_host_show = current_user.shows.where({show_date: @performance.performance_date, location: @performance.location})[0] %>
+					<%= f.hidden_field :performance_id, value: @performance.id %>
+					<%= f.hidden_field :show_id, value: this_host_show.id %>
+					<%= f.submit "Request Performance" %>
+				<% end %>
+			<% end %>
+		</div>
+		<div class="col-xs-6">
+			<% if @pending_requests.any? %>
+				<h4>Pending Requested Hosts:</h4>
+				<% @pending_requests.each do |request| %>
+					<% pending_performance = request.performance %>
+					<% if current_user.type == "Band" and request.status == "pending" %>
+						<% if request.requester_id == current_user.id  %>
+							<%= request.show.host.name %> - <i>Your request is pending</i>
+						<% else %>
+							<%= request.show.host.name %>
+							<%= form_for pending_performance, method: :put do |f| %>
+								<%= f.hidden_field :show_id, value: request.show.id %>
+								<%= f.hidden_field :id, value: pending_performance.id %>
+								<%= f.submit "Confirm" %>
+								<%= f.submit "Deny" %>
+							<% end %>
+						<% end %>
+					<% end %>
+				<% end %>
+			<% end %>
+		</div>
+	</div>
+</div>

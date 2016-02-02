@@ -1,1 +1,4 @@
-<%= @performances.count %>
+<% @match_performances.each do |performance| %>
+	<p><%= link_to performance.band.name, performance_path(performance.id) %></p>
+	<p><%= performance.performance_date %></p>
+<% end %>

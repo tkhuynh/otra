@@ -1,6 +1,8 @@
 <div class="container">
 	<h2><%= @host.name %></h2>
 	<%= link_to "Add Show", new_show_path %>
+	<br>
+	<%= link_to "Find Bands", performances_path %>
 	<hr>
 	<ul>
 		<% @host.shows.all.each do |show| %>

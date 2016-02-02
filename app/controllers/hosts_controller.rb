@@ -4,3 +4,6 @@ class HostsController < ApplicationController
 		
 	end
 end
+
+
+
