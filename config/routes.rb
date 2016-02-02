@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :tours
   resources :shows
   resources :performances, only: [:index, :update]
+  resources :requests, only: [:create, :update]
 
   get '/dashboard', to: 'bands#dashboard'
   

@@ -1,28 +1,51 @@
-<!-- helper variables -->
-<% all_pending_performances = Performance.all.where(status: "pending") %>
-	<% this_show_pending_performances = all_pending_performances.where({performance_date: @show.show_date, location: @show.location, show_id: @show.id}) %>
-
 <div class="container">
 	<div class="row">
 		<h1><%= @show.venue %></h1>
 		<div class="col-xs-6">
 			<h3><strong>Location: </strong><%= @show.location %></h3>
 			<h3><strong>Show Date: </strong><%= @show.show_date %></h3>
-			<h4><strong>Total Performances: </strong><%= @show.slots %></h4>
-			<h4><strong>Confirm Performances: </strong><%= @show.performances.where(status: "confirmed").count %></h4>
-			<h4><strong>Performances to fill: </strong><%= @show.slots - @show.performances.where(status: "confirmed").count %></h4>
-			<% if @show.slots > 0 and current_user.type == "Band" %>
-				<%= link_to "Request Performance", @performance, method: :put %>
+			<h4><strong>Total Slots: </strong><%= @show.slots %></h4>
+			<h4><strong>Available Slots: </strong><%= @show.slots - @confirmed_requests.count %></h4>
+			<% if @confirmed_requests.any? %>
+				<h4><strong>Confirmed Bands:</strong></h4>
+				<% @confirmed_requests.each do |confirmed| %>
+					<ul>
+						<li><%= confirmed.performance.band.name %></li>
+					</ul>
+				<% end %>
+			<% end %>
+			<% if @show.slots > 0 and current_user.type == "Band" and @band_request.empty? %>
+				<%= form_for @request do |f| %>
+					<%= f.hidden_field :status, value: "pending" %>
+					<%= f.hidden_field :requester_id, value: current_user.id %>
+					<% this_band_performance = current_user.performances.where({status: "scheduled", performance_date: @show.show_date, location: @show.location})[0] %>
+					<%= f.hidden_field :performance_id, value: this_band_performance.id %>
+					<%= f.hidden_field :show_id, value: @show.id %>
+					<%= f.submit "Request Slot" %>
+				<% end %>
 			<% end %>
 		</div>
 		<div class="col-xs-6">
-			<h4>Pending Requested Bands:</h4>
-			<% @pending_performances.each do |pending_perf| %>
-				<p>performance id: <%= @performance_id = pending_perf.id %> - <%= link_to Band.find(pending_perf.band_id).name, band_path(Band.find(pending_perf.band_id).id) %></p>
-				<%= form_for pending_perf, method: :put do |f| %>
-					<%= f.hidden_field :id, value: pending_perf.id %>
-					<%= f.submit "Add" %>
+			<% if @pending_requests.any? %>
+				<h4>Pending Requested Bands:</h4>
+				<% @pending_requests.each do |request| %>
+					<% pending_perf = request.performance %>
+					<% if current_user.type == "Host" and request.status == "pending" and pending_perf.status == "scheduled" %>
+						<%= request.performance.band.name %>
+						<%= form_for pending_perf, method: :put do |f| %>
+							<%= f.hidden_field :show_id, value: @show.id %>
+							<%= f.hidden_field :id, value: pending_perf.id %>
+							<%= f.submit "Confirm" %>
+							<%= f.submit "Deny" %>
+						<% end %>
+					<% elsif current_user.type == "Band" %>
+						<%= request.performance.band.name %>
+					<% end %>
 				<% end %>
+			<% end %>
+
+			<% if @band_request[0].status == "denied" %>
+				<h2>You have been denied by the host.</h2>
 			<% end %>
 		</div>
 	</div>
