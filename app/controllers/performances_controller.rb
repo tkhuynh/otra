@@ -4,6 +4,10 @@ class PerformancesController < ApplicationController
   before_action :matching_performances, only: [:index, :show]
 
   def index
+    if current_user.type == "Band" 
+      all_performances = current_user.performances
+      render json: all_performances
+    end
   end
 
 
