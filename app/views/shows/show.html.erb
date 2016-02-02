@@ -31,12 +31,19 @@
 				<% @pending_requests.each do |request| %>
 					<% pending_perf = request.performance %>
 					<% if current_user.type == "Host" and request.status == "pending" and pending_perf.status == "scheduled" %>
-						<%= request.performance.band.name %>
-						<%= form_for pending_perf, method: :put do |f| %>
-							<%= f.hidden_field :show_id, value: @show.id %>
-							<%= f.hidden_field :id, value: pending_perf.id %>
-							<%= f.submit "Confirm" %>
-							<%= f.submit "Deny" %>
+						<br>
+						
+						<% if request.requester_id == current_user.id  %>
+							<%= request.performance.band.name %> - <i>Your request is pending</i>
+							
+						<% elsif %>
+							<%= request.performance.band.name %>
+							<%= form_for pending_perf, method: :put do |f| %>
+								<%= f.hidden_field :show_id, value: @show.id %>
+								<%= f.hidden_field :id, value: pending_perf.id %>
+								<%= f.submit "Confirm" %>
+								<%= f.submit "Deny" %>
+							<% end %>
 						<% end %>
 					<% elsif current_user.type == "Band" %>
 						<%= request.performance.band.name %>
@@ -44,7 +51,7 @@
 				<% end %>
 			<% end %>
 
-			<% if @band_request[0].status == "denied" %>
+			<% if current_user.type == "Band" and @band_request.any? and @band_request[0].status == "denied" %>
 				<h2>You have been denied by the host.</h2>
 			<% end %>
 		</div>
