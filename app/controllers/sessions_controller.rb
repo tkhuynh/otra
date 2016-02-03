@@ -14,10 +14,10 @@ class SessionsController < ApplicationController
 			session[:user_id] = @user.id
 			if @user.type == "Host"
 				#after login redirect Host to profile page
-				redirect_to host_path(@user)
+				redirect_to host_dashboard_path
 			elsif @user.type == "Band"
 				#after login redirect to Band profil page
-				redirect_to dashboard_path
+				redirect_to band_dashboard_path
 			end
 		else
 			flash[:error] = "Incorrect email or password."
