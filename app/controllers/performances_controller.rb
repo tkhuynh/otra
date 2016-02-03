@@ -4,6 +4,7 @@ class PerformancesController < ApplicationController
   before_action :matching_performances, only: [:index, :show]
 
   def index
+    @match_performances.sort_by! {|x| [x[0] - Date.today]}
     if current_user.type == "Band" 
       all_performances = current_user.performances
       render json: all_performances
@@ -96,7 +97,6 @@ private
         end
       end
     end
-    @match_performances.sort_by! {|x| [x[0] - Date.today]}
   end
 
   def set_performance
