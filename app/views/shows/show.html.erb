@@ -1,6 +1,7 @@
 <div class="container">
 	<div class="row">
 		<h1><%= @show.venue %></h1>
+		<%= image_tag @show.flyer.url(:medium) %><br>
 		<div class="col-xs-4">
 			<h3><strong>Location: </strong><%= @show.location %></h3>
 			<h3><strong>Show Date: </strong><%= @show.show_date %></h3>
