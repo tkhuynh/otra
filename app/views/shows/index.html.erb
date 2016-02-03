@@ -1,6 +1,31 @@
-<h1>Shows#index</h1>
-<p>Find me in app/views/shows/index.html.erb</p>
-<% @match_shows.each do |show| %>
-	<h4><%= show.venue %> - <%= show.show_date %> - <%= show.location %> - <%= show.id %></h4>
-	<%= link_to "view", show_path(show) %>
-<% end %>
+<div class="container">
+	<div class="row">
+		<div class="col-xs-12">
+			<ul class="nav nav-tabs">
+				<% @match_shows.each do |show_by_date| %>
+					<li><a data-toggle="tab" href="#<%= show_by_date[0] %>"><%= show_by_date[0] %></a></li>
+				<% end %>
+			</ul>
+			<div class="row">
+				<div class="tab-content">
+					<% @match_shows.each do |show_by_date| %>
+						<div id="<%= show_by_date[0] %>" class="tab-pane fade">
+							<% show_by_date[1].each do |one_show| %>
+								<div class="col-sm-6 col-md-4">
+									<div class="thumbnail">
+										<img src="http://farm4.static.flickr.com/3061/2843390878_33dea8dbd1.jpg", style="height: 200px">
+										<div class="caption">
+											<h3><%= one_show.venue %></h3>
+											<h4><%= link_to "view", show_path(one_show) %></h4>
+										</div>
+									</div>
+								</div>
+							<% end %>
+						</div>
+					<% end %>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
