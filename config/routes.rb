@@ -1,6 +1,6 @@
 Rails.application.routes.draw do 
 
-  root to: 'users#new'
+  root to: 'application#home'
 
   resources :users, except: [:show, :destroy]
   resources :bands, only: [:show, :update]

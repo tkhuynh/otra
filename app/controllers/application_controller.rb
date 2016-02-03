@@ -13,4 +13,9 @@ class ApplicationController < ActionController::Base
     redirect_to login_path unless current_user
   end
   
+  def home
+    current_user
+    render template: "layouts/home.html.erb"
+  end
+
 end
