@@ -1,15 +1,19 @@
 <div class="container">
 	<h2><%= @band.name %></h2>
 	<hr>
-	<h2>
-		Current Tours
-	</h2>
+	<h2>Your Tours:</h2>
 	<% @band.tours.all.each do |tour| %>
 		<ul>
 			<h3><%= tour.name %></h3>
 			<% tour.performances.order("performance_date asc").all.each do |perf| %>
+				<% confirmed_request = Request.where({performance_id: perf.id, status: "confirmed"})[0] %>
 				<li>
-					<%= perf.performance_date %> - <%= perf.location %> - <%= perf.status %>
+					<p><%= perf.performance_date %> - <%= perf.location %></p>
+					<p>Status: <%= perf.status %></p>
+					<% if confirmed_request %>
+						<p>Performance will be at <%= confirmed_request.show.venue %></p>
+					<% end %>
+					<p><%= link_to "view", performance_path(perf.id) %></p>
 				</li>
 			<% end %>
 		</ul>

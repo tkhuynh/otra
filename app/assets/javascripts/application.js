@@ -82,6 +82,11 @@ $(function() {
 	}
 
 	google.maps.event.addDomListener(window, 'load', initialize);
+
+	// tab for group shows and group performances
+	$(".date-tab").first().addClass("active");
+	$(".tab-pane").first().addClass("in active");
+
 });
 
 
