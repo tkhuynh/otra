@@ -1,6 +1,7 @@
 /*App colors*/
 $otra-purple: #4e2b49;
 $otra-lightpurple: #7d7187;
+$otra-lightestpurple: #f6f2f9;
 $otra-pink: #ff3d48;
 $otra-lightpink: #ffa080;
 $otra-offwhite: #f9f7dc;
@@ -27,7 +28,7 @@ hr{
 }
 
 .navbar .nav > li > a {
-	color: $otra-lightpurple;
+	color: $otra-purple;
 	&:hover, &:focus {
 		color: $otra-lightpink;
 	}
@@ -48,7 +49,7 @@ hr{
 
 
 .dropdown-menu {
-	background-color: $otra-offwhite;
+	background-color: $otra-lightpurple;
 }
 
 .dropdown-menu > li > a {
@@ -188,6 +189,50 @@ label {
 	background-color: #f7f7f7;	
 	margin-top: 10px;
 	padding: 10px 0px 10px 0px;
+}
+
+/*dashboard*/
+
+.user-sidebar {
+	font-family: 'modern_sansregular';
+	color: $otra-purple;
+	background-color: $otra-lightpink;
+	a {
+			text-decoration: none;
+			color: $otra-purple;
+			&:hover {
+				color: $otra-lightpurple
+			};
+	};
+}
+
+.img-rounded {
+	border: 3px solid $otra-purple;
+	border-radius: 50%;
+	margin-left: 22px;
+	margin-top: 37px;
+	height: auto;
+	width: 85%;
+	padding: 4px;
+	background-color: $otra-lightpurple;
+	-moz-box-shadow:    inset 0 0 3px #000000;
+	-webkit-box-shadow: inset 0 0 3px #000000;
+	box-shadow:         inset 0 0 3px #000000;
+	overflow: hidden;
+}
+
+#map {
+	margin-top: 30px !important;
+}
+
+.shadowbox {
+	box-shadow: 0 0 10px 1px rgba(0,0,0,0.25);
+	background-color: $otra-lightestpurple;
+}
+
+.card-body {
+	padding: 10px;
+	margin-top: -10px;
 }
 
 /* alert */

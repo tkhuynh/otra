@@ -62,7 +62,7 @@ $(function() {
 			mapTypeId: google.maps.MapTypeId.ROADMAP
 		});
 
-		$.get("/performances.json", function(data) {
+		$.get("/dashboard.json", function(data) {
 			data.forEach(function (city) {
 				var cityName = city.location;
 				if (cityName !== undefined) {
@@ -72,7 +72,7 @@ $(function() {
 						var marker = new google.maps.Marker({
 							position: new google.maps.LatLng(latitude, longitude),
 							map: map,
-							title: 'Start date - ' + city.performance_date,
+							title: city.location + ' - ' + city.performance_date,
 							icon: 'http://icons.iconarchive.com/icons/glyphish/glyphish/32/07-map-marker-icon.png'
 						});
 					});
