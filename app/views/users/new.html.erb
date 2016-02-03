@@ -1,11 +1,34 @@
-<div class="container">
-	<div class="row">
-		<div class="col-xs-8 col-xs-offset-2">
-			<%= form_for @user, class: "signup-form" do |f| %>
-				<h3 class="text-center">Sign Up</h3>
+<div class="row">
+	<div class="band-how-it-works">
+		<div class="col-md-4 col-md-offset-1">
+			<img class="logo logo-info" alt="LogoBands" src="/assets/otraband-01" /><br>
+			<hr>
+			<div class="tagline image-labels text-center"><a href="#signup", class="band-signup">BANDS</a></div>
+			<hr>
+			<% if !current_user %>
+				<h4><strong><a href="#signup", id="band-signup">Signup</a></strong> as a band and get started by creating a tour route and connecting with hosts!</h4>
+			<% end %>
+		</div>
+		<div class="col-md-4 col-md-offset-2">
+			<img class="logo logo-info" alt="LogoBands" src="/assets/otrahosts-01" />
+			<hr>
+			<div class="tagline image-labels text-center"><a href="#signup", class="host-signup">HOSTS</a></div>
+			<hr>
+			<% if !current_user %>
+				<h4><strong><a href="#signup", class="host-signup">Signup</a></strong> as a host and get started by creating some shows and connecting with bands!</h4>
+			<% end %>
+		</div>
+	</div>
+</div>
+<% if !current_user %>
+	<section id="signup" hidden>
+		<div class="row">
+			<div class="col-xs-6 col-xs-offset-3 signup-form">
+				<%= form_for :user, url: users_path, method: :post, html: { multipart: true } do |f| %>
+					<h3 class="text-center form-title">Let's Music Connect The World</h3>
 					<div class="form-group">
 						<%=  f.label :name %>
-						<%=  f.text_field :name, class: "form-control" %>
+						<%=  f.text_field :name, class: "form-control", autofocus: true %>
 					</div>
 					<div class="form-group">
 						<%=  f.label :email %>
@@ -16,8 +39,7 @@
 						<%=  f.text_field :location, class: "form-control city_stops" %>
 					</div>
 					<div class="form-group">
-						<%=  f.label :type, "Role" %>
-						<%=  f.collection_select :type, @role, :to_s, :to_s, {prompt: "Are you a band or a host?"}, class: "form-control dropdown-toggle", required: true %>
+						<%=  f.hidden_field :type, id: "role" %>
 					</div>
 					<div class="form-group">
 						<%=  f.label :password %>
@@ -30,7 +52,8 @@
 					<div class="form-group text-center">
 						<%= f.submit "Sign Up", class: "btn btn-primary form-control" %>
 					</div>
-			<% end %>
+				<% end %>
+			</div>
 		</div>
-	</div>
-</div>
+	</section>
+<% end %>

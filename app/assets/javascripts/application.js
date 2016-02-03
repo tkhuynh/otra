@@ -87,6 +87,15 @@ $(function() {
 	$(".date-tab").first().addClass("active");
 	$(".tab-pane").first().addClass("in active");
 
+	// signup form
+	$(".host-signup").click(function (e) {
+		$("#signup").show();
+		$("#role").val("Host");
+	});
+	$(".band-signup").click(function (e) {
+		$("#signup").show();
+		$("#role").val("Band");
+	});
 });
 
 
