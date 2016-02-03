@@ -10,7 +10,11 @@ class UsersController < ApplicationController
   def create
     #don't let current user create new account
     if !current_user 
-      @user = User.new(user_params)
+      update_user_params = user_params
+      city = user_params["location"]
+      city.sub!(/, United States/, "")
+      update_user_params[:location] = city
+      @user = User.new(update_user_params)
       if @user.save
         session[:user_id] = @user.id
         flash[:notice] = "Successfully signed up."
