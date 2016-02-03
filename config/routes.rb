@@ -10,7 +10,8 @@ Rails.application.routes.draw do
   resources :performances, only: [:index, :show, :update]
   resources :requests, only: [:create, :update]
 
-  get '/dashboard', to: 'bands#dashboard'
+  get '/band_dashboard', to: 'bands#dashboard'
+  get '/host_dashboard', to: 'hosts#dashboard'
   
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'

@@ -59,11 +59,10 @@ $(function() {
 		map = new google.maps.Map(document.getElementById('map'), {
 			center: center,
 			zoom: 4,
-			mapTypeId: google.maps.MapTypeId.ROADMAP,
-			scrollwheel: false
+			mapTypeId: google.maps.MapTypeId.ROADMAP
 		});
 
-		$.get("/dashboard.json", function(data) {
+		$.get("/band_dashboard.json", function(data) {
 			data.forEach(function (city) {
 				var cityName = city.location;
 				if (cityName !== undefined) {

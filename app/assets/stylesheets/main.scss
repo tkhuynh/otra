@@ -197,8 +197,11 @@ label {
 	height:100vh;
 	font-family: 'modern_sansregular';
 	color: $otra-purple;
-	background-color: $otra-lightpurple;
+	background-color: $otra-offwhite;
 	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+	position: absolute;
+	z-index: 1000;
+	width: 325px;
 	a {
 			text-decoration: none;
 			color: $otra-purple;
@@ -209,7 +212,7 @@ label {
 }
 
 .dashboard-content {
-	background-color: $otra-purple;
+	background-color: $otra-offwhite;
 	padding-left: 20px;
 	padding-right: 20px;
 	margin-left: -40px;
