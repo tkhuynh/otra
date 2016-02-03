@@ -106,7 +106,7 @@ hr{
 		text-decoration: none;
 		color: $otra-purple;
 		&:hover {
-			color: $otra-lightpurple
+			color: $otra-lightpurple;
 		};
 	};
 
@@ -121,16 +121,21 @@ hr{
 	font-family: 'modern_sansregular'
 }
 
-/*forms*/
-
-.new_show {
-	background-color: $otra-offwhite;
-	border: 2px solid $otra-purple;
-	margin-top: 30px;
-	margin-bottom: 20px;
-	padding: 30px;
-	padding-bottom: 15px;
+a.down-arrow, , a#add, a#remove {
+	text-decoration: none;
+	color: $otra-purple;
 }
+a.down-arrow:visited, a#add:visited, a#remove:visited {
+	color: $otra-purple;
+}
+a.down-arrow:hover, a#add:hover, a#remove:hover {
+	color: $otra-lightpurple;
+} 
+
+a.band-signup, a.host-signup {
+	color: $otra-offwhite;
+}
+/*forms*/
 
 .headers {
 	font-family: 'modern_sansregular';
@@ -145,27 +150,45 @@ hr{
 	border-radius: 0;
 	font-family: 'modern_sansregular';
 	background-color: $otra-purple;
+	color: $otra-offwhite;
 	border-radius: 0px;
 	&:hover {
-		color: $otra-lightpurple;
+		background-color: $otra-lightpurple;
 	};
+}
+.btn-primary {
+	border-color: none;
 }
 
 input.form-control {
 	border-radius: 0;
 }
 
-label, .form-title {
+label {
 	color: $otra-purple;
 	font-family: 'modern_sansregular';
 }
 
-.signup-form {
-	background-color: #EEEEEE;
-  padding: 20px;
+.form-title {
+	background-color: $otra-purple;
+	color: $otra-offwhite;
+	font-family: 'modern_sansregular';
+	padding: 20px;
+	margin-top: 0;
+}
+
+.signup-form, .login-form, .new-tour-form, .edit-profile-form, .new-show-form {
+	background-color: #f6f2f9;
+	border: 2px solid $otra-purple;
   box-shadow: 0 0 10px 1px rgba(0,0,0,0.25);
-  margin-bottom: 1em;
-  margin-top: 1em;
+  margin-bottom: 2em;
+  margin-top: 2em;
+}
+
+.fields {
+	background-color: #f7f7f7;	
+	margin-top: 10px;
+	padding: 10px 0px 10px 0px;
 }
 
 /*dashboard*/
