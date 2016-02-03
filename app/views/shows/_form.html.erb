@@ -4,10 +4,6 @@
 		<%=  f.text_field :venue, class: "form-control" %>
 	</div>
 	<div class="form-group">
-		<%= f.label :flyer %>
-		<%= f.file_field :flyer %>
-	</div>
-	<div class="form-group">
 		<%=  f.hidden_field :location, value: current_user.location %>
 	</div>
 	<div class="form-group">
@@ -17,6 +13,10 @@
 	<div class="form-group">
 		<%=  f.label :slots, "Number of Performances" %>
 		<%=  f.number_field :slots, value: 1, min: 1, class: "form-control" %>
+	</div>
+	<div class="form-group">
+		<%= f.label :flyer %>
+		<%= f.file_field :flyer %>
 	</div>
 	<div class="form-group text-center">
 		<%= f.submit "Save", class: "btn btn-primary form-control" %>

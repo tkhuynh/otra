@@ -136,15 +136,6 @@ a.band-signup, a.host-signup {
 }
 /*forms*/
 
-.new_show {
-	background-color: $otra-offwhite;
-	border: 2px solid $otra-purple;
-	margin-top: 30px;
-	margin-bottom: 20px;
-	padding: 30px;
-	padding-bottom: 15px;
-}
-
 .headers {
 	font-family: 'modern_sansregular';
 	text-transform: uppercase;
@@ -185,8 +176,9 @@ label {
 	margin-top: 0;
 }
 
-.signup-form, .login-form, .new-tour-form {
-	background-color: #EEEEEE;
+.signup-form, .login-form, .new-tour-form, .edit-profile-form, .new-show-form {
+	background-color: #f6f2f9;
+	border: 2px solid $otra-purple;
   box-shadow: 0 0 10px 1px rgba(0,0,0,0.25);
   margin-bottom: 2em;
   margin-top: 2em;
