@@ -5,12 +5,18 @@ $otra-pink: #ff3d48;
 $otra-lightpink: #ffa080;
 $otra-offwhite: #f9f7dc;
 
+
 body {
 	background-color: $otra-offwhite;
+	padding-top: 70px;
+}
+
+hr{
+   border: 1px solid $otra-purple;
 }
 
 .navbar {
-	background-color: $otra-purple;
+	background-color: $otra-offwhite;
 	border: none;
 	border-radius: 0px;
 	-webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
@@ -23,24 +29,121 @@ body {
 .navbar .nav > li > a {
 	color: $otra-lightpurple;
 	&:hover, &:focus {
-		color: $otra-pink;
+		color: $otra-lightpink;
 	}
 }
 
 .navbar-default .navbar-brand {
-	color: $otra-lightpurple;
+	margin-top: 7px;
+	font-size: 50px;
+	color: $otra-purple;
 	&:hover {
-		color: $otra-pink;
+		color: $otra-lightpink;
 	}
+}
+
+.navbar-default .navbar-nav > li > a {
+	margin-top: 3px;
+}
+
+
+.dropdown-menu {
+	background-color: $otra-offwhite;
+}
+
+.dropdown-menu > li > a {
+	color: $otra-purple;
 }
 
 /*homepage*/
 
+.logo {
+	height: 250px;
+}
+
+.logo-info {
+	margin-left: 95px;
+}
+
+.tagline {
+	font-size: 75px;
+}
+
+.image-labels {
+	margin-left: 10px;
+}
+
 .welcome {
 	margin-top: -20px;
 	color: $otra-offwhite;
-	height: 400px;
-	background-color: $otra-lightpurple;
+	background-color: $otra-purple;
 	font-family: 'modern_sansregular';
 	font-size: 25px;
+}
+
+.info {
+	padding: 20px 0px 20px 20px;
+	color: $otra-purple;
+	font-family: 'modern_sansregular';
+	font-size: 100px;
+	line-height: 80%;
+}
+
+.info-header {
+	margin-top: 30px;
+	word-spacing: -32px;
+}
+
+.band-how-it-works {
+	height: 600px;
+	padding-top: 50px;
+	padding-left: 40px;
+	background-color: $otra-lightpink;
+	color: $otra-purple;
+	font-family: 'modern_sansregular';
+	a {
+		text-decoration: none;
+		color: $otra-purple;
+		&:hover {
+			color: $otra-lightpurple
+		};
+	};
+
+}
+
+.steps {
+	margin-top: 40px;
+	padding: 20px 10px 20px 20px;
+	background-color: $otra-offwhite;
+	border: 2px solid $otra-purple;
+	color: $otra-purple;
+	font-family: 'modern_sansregular'
+}
+
+/*forms*/
+
+.new_show {
+	background-color: $otra-offwhite;
+	border: 2px solid $otra-purple;
+	margin-top: 30px;
+	margin-bottom: 20px;
+	padding: 30px;
+	padding-bottom: 15px;
+}
+
+.headers {
+	font-family: 'modern_sansregular';
+	text-transform: uppercase;
+	color: $otra-offwhite;
+	background-color: $otra-purple;
+	padding: 10px;
+	margin-bottom: -30px;
+}
+
+.btn {
+	background-color: $otra-purple;
+	border-radius: 0px;
+	&:hover {
+		color: $otra-lightpurple;
+	};
 }
