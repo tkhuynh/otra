@@ -5,8 +5,14 @@ $otra-pink: #ff3d48;
 $otra-lightpink: #ffa080;
 $otra-offwhite: #f9f7dc;
 
+
 body {
 	background-color: $otra-offwhite;
+	padding-top: 70px;
+}
+
+hr{
+   border: 1px solid $otra-purple;
 }
 
 .navbar {
@@ -59,6 +65,10 @@ body {
 	font-size: 75px;
 }
 
+.image-labels {
+	margin-left: 10px;
+}
+
 .welcome {
 	margin-top: -20px;
 	color: $otra-offwhite;
@@ -77,17 +87,24 @@ body {
 
 .info-header {
 	margin-top: 30px;
-	margin-bottom: 35px;
 	word-spacing: -32px;
 }
 
 .band-how-it-works {
-	height: 400px;
-	padding-top: 10px;
+	height: 600px;
+	padding-top: 50px;
 	padding-left: 40px;
 	background-color: $otra-lightpink;
 	color: $otra-purple;
-	font-family: 'modern_sansregular'
+	font-family: 'modern_sansregular';
+	a {
+		text-decoration: none;
+		color: $otra-purple;
+		&:hover {
+			color: $otra-lightpurple
+		};
+	};
+
 }
 
 .steps {
