@@ -14,3 +14,5 @@
 
 # Ignore byebug
 .byebug_history
+
+.env
