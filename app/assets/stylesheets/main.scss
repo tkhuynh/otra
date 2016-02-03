@@ -9,7 +9,6 @@ $otra-offwhite: #f9f7dc;
 
 body {
 	background-color: $otra-offwhite;
-	padding-top: 70px;
 }
 
 hr{
@@ -194,9 +193,12 @@ label {
 /*dashboard*/
 
 .user-sidebar {
+	padding-top: 40px;
+	height:100vh;
 	font-family: 'modern_sansregular';
 	color: $otra-purple;
-	background-color: $otra-lightpink;
+	background-color: $otra-lightpurple;
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
 	a {
 			text-decoration: none;
 			color: $otra-purple;
@@ -204,6 +206,29 @@ label {
 				color: $otra-lightpurple
 			};
 	};
+}
+
+.dashboard-content {
+	background-color: $otra-purple;
+	padding-left: 20px;
+	padding-right: 20px;
+	margin-left: -40px;
+	overflow:auto;
+	overflow-x: hidden;
+	height:100vh;
+}
+
+@media (max-width: 768px) {
+	.dashboard-content {
+		background-color: $otra-purple;
+		padding-top: 20px;
+		padding-left: 20px;
+		padding-right: 20px;
+		margin-left: -40px;
+		overflow-y: scroll;
+		overflow-x: hidden;
+		height: 100vh;
+	}
 }
 
 .img-rounded {
@@ -227,12 +252,25 @@ label {
 
 .shadowbox {
 	box-shadow: 0 0 10px 1px rgba(0,0,0,0.25);
-	background-color: $otra-lightestpurple;
 }
 
 .card-body {
+	background-color: $otra-lightestpurple;
+	color: $otra-purple;
+	font-family: 'modern_sansregular';
 	padding: 10px;
 	margin-top: -10px;
+	span {
+		text-transform: uppercase;
+		font-size: 18px;
+	}
+	a {
+		text-decoration: none;
+		color: $otra-purple;
+		&:hover {
+			color: $otra-lightpurple
+		};
+	}
 }
 
 /* alert */

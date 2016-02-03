@@ -1,69 +1,73 @@
-<div class="container">
-	<div class="row">
-		<div class="col-xs-3">
-			<div class="user-sidebar shadowbox">
-				<h1 class="headers"><%= @band.name %></h1>
-				<div class="img-rounded">
-					<%= image_tag @band.avatar.url(:medium), class: "img-responsive avatar image-resize"%>
+<div class="row">
+	<div class="col-xs-3">
+		<div class="user-sidebar shadowbox">
+			<h1 class="headers"><%= @band.name %></h1>
+			<div class="img-rounded">
+				<%= image_tag @band.avatar.url(:medium), class: "img-responsive avatar image-resize"%>
+			</div>
+			<div class="container">
+				<br>
+				<%= @band.email %><br>
+				<%= @band.location %><br><br>
+				<%= link_to "Add Tour", new_tour_path %>
+				<br>
+				<%= link_to "Find Venue", shows_path %>
+			</div>
+		</div>
+	</div>
+	<div class="col-xs-9">
+	<div class="dashboard-content">
+		<% @band.tours.each do |tour| %>
+		<div class="shadowbox">
+			<h3 class="headers">
+			<%= tour.name %>
+			</h3>
+			<div id="map"></div>
+		</div>
+		<div class="row">
+			<div class="col-xs-4">
+				<div class="shadowbox">
+					<h3 class="headers">CONFIRMED SHOWS</h3>
+					<br>
+					<br>
+					<div class="card-body">
+						<% tour.performances.where(status: 'confirmed').each do |perf| %>
+						<%= link_to perf.performance_date.strftime("%m/%d/%Y"), performance_path(perf) %> <br> 
+						<span><%= perf.location %></span>
+						<hr>
+						<% end %>
+					</div>
 				</div>
-				<div class="container">
+			</div>
+			<div class="col-xs-4">
+				<div class="shadowbox">
+					<h3 class="headers">SCHEDULED SHOWS</h3>
 					<br>
-					<%= link_to "Add Tour", new_tour_path %>
 					<br>
-					<%= link_to "Find Venue", shows_path %>
+					<div class="card-body">
+						<% tour.performances.where(status: 'scheduled').each do |perf| %>
+						<%= perf.performance_date.strftime("%m/%d/%Y") %> <br> <span><%= perf.location %></span>
+						<hr>
+						<% end %>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-4">
+				<div class="shadowbox">
+					<h3 class="headers">PENDING SHOWS</h3>
+					<br>
+					<br>
+					<div class="card-body">
+						<% tour.performances.where(status: 'pending').each do |perf| %>
+						<%= perf.performance_date.strftime("%m/%d/%Y") %> <br> 
+						<span><%= perf.location %></span>
+						<hr>
+						<% end %>
+					</div>
 				</div>
 			</div>
 		</div>
-		<div class="col-xs-9">
-			<% @band.tours.each do |tour| %>
-				<div class="shadowbox">
-					<h3 class="headers">
-						<%= tour.name %>
-					</h3>
-					<div id="map"></div>
-				</div>
-				<div class="row">
-					<div class="col-xs-4">
-						<div class="shadowbox">
-							<h3 class="headers">CONFIRMED SHOWS</h3>
-							<br>
-							<br>
-							<div class="card-body">
-								<% tour.performances.where(status: 'confirmed').each do |perf| %>
-									<%= link_to perf.performance_date, performance_path(perf) %> - <%= perf.location %> - <%= perf.status %>
-									<br>
-								<% end %>
-							</div>
-						</div>
-					</div>
-					<div class="col-xs-4">
-						<div class="shadowbox">
-						<h3 class="headers">SCHEDULED SHOWS</h3>
-						<br>
-						<br>
-							<div class="card-body">
-								<% tour.performances.where(status: 'scheduled').each do |perf| %>
-										<%= perf.performance_date %> - <%= perf.location %> - <%= perf.status %>	
-									<br>
-								<% end %>
-							</div>
-						</div>
-					</div>
-					<div class="col-xs-4">
-						<div class="shadowbox">
-							<h3 class="headers">PENDING SHOWS</h3>
-							<br>
-							<br>
-							<div class="card-body">
-								<% tour.performances.where(status: 'pending').each do |perf| %>
-									<%= perf.performance_date %> - <%= perf.location %> - <%= perf.status %>
-									<br>
-								<% end %>
-							</div>
-						</div>
-					</div>
-				</div>
-			<% end %>
-		</div>
+		<% end %>
+	</div>
 	</div>
 </div>

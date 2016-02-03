@@ -59,7 +59,8 @@ $(function() {
 		map = new google.maps.Map(document.getElementById('map'), {
 			center: center,
 			zoom: 4,
-			mapTypeId: google.maps.MapTypeId.ROADMAP
+			mapTypeId: google.maps.MapTypeId.ROADMAP,
+			scrollwheel: false
 		});
 
 		$.get("/dashboard.json", function(data) {
