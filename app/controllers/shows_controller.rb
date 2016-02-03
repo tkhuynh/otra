@@ -96,7 +96,7 @@ class ShowsController < ApplicationController
 
  private
  	def show_params
- 		params.require(:show).permit(:venue, :location, :slots, :host_id, :show_date, :booked)
+ 		params.require(:show).permit(:venue, :location, :slots, :host_id, :show_date, :booked, :flyer)
  	end
 
  	def find_show
