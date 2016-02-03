@@ -141,9 +141,42 @@ hr{
 }
 
 .btn {
+	border-radius: 0;
+	font-family: 'modern_sansregular';
 	background-color: $otra-purple;
 	border-radius: 0px;
 	&:hover {
 		color: $otra-lightpurple;
 	};
+}
+
+input.form-control {
+	border-radius: 0;
+}
+
+label, .form-title {
+	color: $otra-purple;
+	font-family: 'modern_sansregular';
+}
+
+.signup-form {
+	background-color: #EEEEEE;
+  padding: 20px;
+  box-shadow: 0 0 10px 1px rgba(0,0,0,0.25);
+  margin-bottom: 1em;
+  margin-top: 1em;
+}
+
+/* alert */
+.alert-info {
+  background-color: #dff0d8;
+  border-color: rgba(60, 118, 61, 0.23);
+  color: #333;
+  margin-bottom: 0px;
+  border-radius: 0px;
+}
+
+.alert-danger {
+  margin-bottom: 0px;
+  border-radius: 0px;
 }
