@@ -16,13 +16,13 @@
 		</div>
 	</div>
 	<div class="col-xs-9">
+	<div id="map"></div>
 	<div class="dashboard-content">
 		<% @band.tours.each do |tour| %>
 		<div class="shadowbox">
-			<h3 class="headers">
-			<%= tour.name %>
-			</h3>
-			<div id="map"></div>
+			<h3 class="headers"><%= tour.name %></h3>
+			<br>
+			<button class="view-map">View on Map</button>
 		</div>
 		<div class="row">
 			<div class="col-xs-4">
