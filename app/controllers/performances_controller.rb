@@ -16,19 +16,17 @@ class PerformancesController < ApplicationController
     @confirmed_request = Request.where({status: "confirmed", performance_id: @performance.id})[0]
     @pending_requests = Request.all.where({status: "pending", performance_id: @performance.id})
     if current_user
-      if current_user.type == "Host" and @match_performances.include?(@performance)
+      if current_user.type == "Host" and @match_performances.any? {|performance| performance = @performance}
         @host_request = Request.where({requester_id: current_user.id, performance_id: @performance.id})
         @performance
       elsif current_user.type == "Band" and current_user.id == @performance.band_id
         @performance
-      else
-        if current_user.type == "Host"
-          flash[:errors] = "You can only see performances in your city."
-          redirect_to host_path(current_user) and return
-        else 
-          flash[:errors] = "You can only view performance you created."
-          redirect_to band_path(current_user) and return
-        end
+      elsif current_user.type == "Host" and @match_performances.any? {|performance| performance = @performance} == false
+        flash[:errors] = "You can only see performances in your city."
+        redirect_to host_path(current_user) and return
+      elsif current_user.type == "Band" and current_user.id != @performance.band_id
+        flash[:errors] = "You can only view performance you created."
+        redirect_to band_path(current_user) and return
       end
     else
       redirect_to signup_path
@@ -90,7 +88,7 @@ private
       @match_performances = []
       # byebug
       current_user.shows.each do |show|
-        match_performances = @host_matched_performances.where({ performance_date: show.show_date})
+        match_performances = @host_matched_performances.where({ performance_date: show.show_date}).group_by {|performance| performance.performance_date}
         if match_performances.any?
           match_performances.each do |performance|
             @match_performances << performance
@@ -98,6 +96,7 @@ private
         end
       end
     end
+    @match_performances.sort_by! {|x| [x[0] - Date.today]}
   end
 
   def set_performance

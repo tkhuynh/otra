@@ -1,4 +1,30 @@
-<% @match_performances.each do |performance| %>
-	<p><%= link_to performance.band.name, performance_path(performance.id) %></p>
-	<p><%= performance.performance_date %></p>
-<% end %>
+<div class="container">
+	<div class="row">
+		<div class="col-xs-12">
+			<ul class="nav nav-tabs">
+				<% @match_performances.each do |performance_by_date| %>
+					<li><a data-toggle="tab" href="#<%= performance_by_date[0] %>"><%= performance_by_date[0] %></a></li>
+				<% end %>
+			</ul>
+			<div class="row">
+				<div class="tab-content">
+					<% @match_performances.each do |performance_by_date| %>
+						<div id="<%= performance_by_date[0] %>" class="tab-pane fade">
+							<% performance_by_date[1].each do |one_performance| %>
+								<div class="col-sm-6 col-md-4">
+									<div class="thumbnail">
+										<img src="http://farm4.static.flickr.com/3061/2843390878_33dea8dbd1.jpg", style="height: 200px">
+										<div class="caption">
+											<h3><%= one_performance.band.name %></h3>
+											<h4><%= link_to "view", performance_path(one_performance) %></h4>
+										</div>
+									</div>
+								</div>
+							<% end %>
+						</div>
+					<% end %>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

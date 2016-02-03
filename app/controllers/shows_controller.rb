@@ -5,9 +5,10 @@ class ShowsController < ApplicationController
 
   def index
     if current_user and current_user.type == "Band" and @match_shows.any?
-      @match_shows
+      @match_shows.sort_by! {|x| [x[0] - Date.today]}
     else
       if current_user.type == "Band"
+        flash[:errors] = "There are any venues match any og your performances."
         redirect_to band_path(current_user)
       elsif current_user.type == "Host"
         redirect_to host_path(current_user)
@@ -44,21 +45,19 @@ class ShowsController < ApplicationController
     @confirmed_requests = Request.where({status: "confirmed", show_id: @show.id})
     @pending_requests = Request.all.where({status: "pending", show_id: @show.id})
     if current_user
-      if current_user.type == "Band" and @match_shows.include?(@show)
+      if current_user.type == "Band" and @match_shows.any? {|show| show = @show}
         host_requests_for_band = Request.where({requester_id: @show.host.id, show_id: @show.id, status: "pending"})
         @host_single_request = host_requests_for_band.select { |hostreq| hostreq.performance.band_id == current_user.id }
         @band_request = Request.where({requester_id: current_user.id, show_id: @show.id, status: "denied"})
         @show
       elsif current_user.type == "Host" and current_user.id == @show.host_id
         @show
-      else
-        if current_user.type == "Band"
-          flash[:errors] = "You can only find venue in city you have performance."
-          redirect_to band_path(current_user) and return
-        else 
-          flash[:errors] = "You can only view show you created."
-          redirect_to host_path(current_user) and return
-        end
+      elsif current_user.type == "Band" and @match_shows.any? {|show| show = @show} == false
+        flash[:errors] = "You can only find venue in city you have performance."
+        redirect_to band_path(current_user) and return
+      elsif current_user.type == "Host" and current_user.id != @show.host_id
+        flash[:errors] = "You can only view show you created."
+        redirect_to host_path(current_user) and return
       end
     else
       redirect_to signup_path
@@ -109,7 +108,7 @@ class ShowsController < ApplicationController
       @band_scheduled_performances = current_user.performances.where(status: "scheduled")
       @match_shows = []
       @band_scheduled_performances.each do |performance|
-        match_shows = Show.all.where({location: performance.location, show_date: performance.performance_date})
+        match_shows = Show.all.where({location: performance.location, show_date: performance.performance_date}).group_by {|show| show.show_date}
         if match_shows.any?
           match_shows.each do |show|
             @match_shows << show
