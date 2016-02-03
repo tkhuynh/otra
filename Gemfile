@@ -31,7 +31,7 @@ gem 'geocomplete_rails'
 
 # Paperclip for photos
 gem "paperclip", "~> 4.3"
-gem 'aws-sdk'
+gem 'aws-sdk', '< 2.0'
 gem 'dotenv', '~> 2.1'
 
 # Use Unicorn as the app server
