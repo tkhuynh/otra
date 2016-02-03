@@ -1,21 +1,30 @@
 <div class="containter">
 	<div class="row">
-		<div class="col-sm-8 col-sm-offset-2">
-			<h2 class="text-center">Log In To Your Account</h2>
-			<%= form_for(:session, url: login_path) do |f| %>
-				<div class="form-group">
-					<%=  label_tag :email %>
-					<%= text_field_tag :email, nil,class: "form-control" %>
+		<div class="col-sm-7">
+			<img src="http://theartmad.com/wp-content/uploads/2015/08/Purple-Music-Notes-Wallpaper-2.jpg" class="img-responsive" style="margin: 0 auto; margin-left: 30px, height: 500px">
+		</div>
+		<div class="col-sm-5" style="display: flex; justify-content: center; transform-style: preserve-3d">
+			<div class="login-form" style="align-self: center; position: relative; top: 50; transform: translateY(25%)">
+				<h3 class="text-center form-title">Log In To Your Account</h3>
+				<div class="row">
+					<div class="col-xs-10 col-xs-offset-1">
+						<%= form_for(:session, url: login_path) do |f| %>
+							<div class="form-group">
+								<%=  label_tag :email %>
+								<%= text_field_tag :email, nil,class: "form-control" %>
+							</div>
+							<div class="form-group">
+								<%=  label_tag :password %>
+								<%= password_field_tag :password, nil,class: "form-control" %>
+							</div>
+							<div class="form-group text-center">
+								<%= submit_tag "Log In", class: "btn btn-primary form-control" %>
+							</div>
+						<% end %>
+					</div>
 				</div>
-				<div class="form-group">
-					<%=  label_tag :password %>
-					<%= password_field_tag :password, nil,class: "form-control" %>
-				</div>
-				<div class="form-group text-center">
-					<%= submit_tag "Log In", class: "btn btn-primary" %>
-				</div>
-			<% end %>
-			<p class="text-center">Not a member yet? <%= link_to "Click Here", signup_path %> to signup.</p>
+				<p class="text-center">Not a member yet? <%= link_to "Click Here", signup_path %> to signup.</p>
+			</div>
 		</div>
 	</div>
 </div>

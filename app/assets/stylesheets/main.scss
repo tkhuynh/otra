@@ -105,7 +105,7 @@ hr{
 		text-decoration: none;
 		color: $otra-purple;
 		&:hover {
-			color: $otra-lightpurple
+			color: $otra-lightpurple;
 		};
 	};
 
@@ -120,6 +120,20 @@ hr{
 	font-family: 'modern_sansregular'
 }
 
+a.down-arrow {
+	text-decoration: none;
+	color: $otra-purple;
+}
+a.down-arrow:visited {
+	color: $otra-purple;
+}
+a.down-arrow:hover {
+	color: $otra-lightpurple;
+} 
+
+a.band-signup, a.host-signup {
+	color: $otra-offwhite;
+}
 /*forms*/
 
 .new_show {
@@ -144,27 +158,38 @@ hr{
 	border-radius: 0;
 	font-family: 'modern_sansregular';
 	background-color: $otra-purple;
+	color: $otra-offwhite;
 	border-radius: 0px;
 	&:hover {
-		color: $otra-lightpurple;
+		background-color: $otra-lightpurple;
 	};
+}
+.btn-primary {
+	border-color: none;
 }
 
 input.form-control {
 	border-radius: 0;
 }
 
-label, .form-title {
+label {
 	color: $otra-purple;
 	font-family: 'modern_sansregular';
 }
 
-.signup-form {
+.form-title {
+	background-color: $otra-purple;
+	color: $otra-offwhite;
+	font-family: 'modern_sansregular';
+	padding: 20px;
+	margin-top: 0;
+}
+
+.signup-form, .login-form {
 	background-color: #EEEEEE;
-  padding: 20px;
   box-shadow: 0 0 10px 1px rgba(0,0,0,0.25);
-  margin-bottom: 1em;
-  margin-top: 1em;
+  margin-bottom: 2em;
+  margin-top: 2em;
 }
 
 /* alert */
