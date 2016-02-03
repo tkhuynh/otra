@@ -120,14 +120,14 @@ hr{
 	font-family: 'modern_sansregular'
 }
 
-a.down-arrow {
+a.down-arrow, , a#add, a#remove {
 	text-decoration: none;
 	color: $otra-purple;
 }
-a.down-arrow:visited {
+a.down-arrow:visited, a#add:visited, a#remove:visited {
 	color: $otra-purple;
 }
-a.down-arrow:hover {
+a.down-arrow:hover, a#add:hover, a#remove:hover {
 	color: $otra-lightpurple;
 } 
 
@@ -185,11 +185,17 @@ label {
 	margin-top: 0;
 }
 
-.signup-form, .login-form {
+.signup-form, .login-form, .new-tour-form {
 	background-color: #EEEEEE;
   box-shadow: 0 0 10px 1px rgba(0,0,0,0.25);
   margin-bottom: 2em;
   margin-top: 2em;
+}
+
+.fields {
+	background-color: #f7f7f7;	
+	margin-top: 10px;
+	padding: 10px 0px 10px 0px;
 }
 
 /* alert */
