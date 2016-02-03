@@ -1,0 +1,46 @@
+/*App colors*/
+$otra-purple: #4e2b49;
+$otra-lightpurple: #7d7187;
+$otra-pink: #ff3d48;
+$otra-lightpink: #ffa080;
+$otra-offwhite: #f9f7dc;
+
+body {
+	background-color: $otra-offwhite;
+}
+
+.navbar {
+	background-color: $otra-purple;
+	border: none;
+	border-radius: 0px;
+	-webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+	-moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+	font-family: 'modern_sansregular';
+	text-transform: uppercase;
+}
+
+.navbar .nav > li > a {
+	color: $otra-lightpurple;
+	&:hover, &:focus {
+		color: $otra-pink;
+	}
+}
+
+.navbar-default .navbar-brand {
+	color: $otra-lightpurple;
+	&:hover {
+		color: $otra-pink;
+	}
+}
+
+/*homepage*/
+
+.welcome {
+	margin-top: -20px;
+	color: $otra-offwhite;
+	height: 400px;
+	background-color: $otra-lightpurple;
+	font-family: 'modern_sansregular';
+	font-size: 25px;
+}
