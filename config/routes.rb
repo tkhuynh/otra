@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root to: 'users#new'
 
   resources :users, except: [:show, :destroy]
-  resources :bands, only: :show
+  resources :bands, only: [:show, :update]
   resources :hosts, only: :show
   resources :tours
   resources :shows

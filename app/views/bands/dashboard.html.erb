@@ -2,6 +2,7 @@
 	<div class="row">
 		<div class="col-xs-3">
 			<h1><%= @band.name %></h1>
+			<%= image_tag @band.avatar.url(:thumb) %><br>
 			<%= link_to "Add Tour", new_tour_path %>
 			<br>
 			<%= link_to "Find Venue", shows_path %>
