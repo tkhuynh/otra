@@ -54,9 +54,9 @@ $(function() {
 	var geocoder;
 	var map;
 	geocoder = new google.maps.Geocoder();
-	function initialize() {
+	function initialize(mapid) {
 		var center = new google.maps.LatLng(38.50033, -97.6500523);
-		map = new google.maps.Map(document.getElementById('map'), {
+		map = new google.maps.Map(document.getElementById(mapid), {
 			center: center,
 			zoom: 4,
 			mapTypeId: google.maps.MapTypeId.ROADMAP,
