@@ -16,11 +16,11 @@
 		</div>
 	</div>
 	<div class="col-xs-9">
-	<div id="map"></div>
 	<div class="dashboard-content">
 		<% @band.tours.each do |tour| %>
 		<div class="shadowbox">
 			<h3 class="headers"><%= tour.name %></h3>
+			<div id="map<%= @band.tours.index(tour) %>" class="map"></div>
 			<button class="view-map">View on Map</button>
 		</div>
 		<div class="row">
@@ -31,8 +31,12 @@
 					<br>
 					<div class="card-body">
 						<% tour.performances.where(status: 'scheduled').each do |perf| %>
-						<%= perf.performance_date.strftime("%m/%d/%Y") %> <br> <span><%= perf.location %></span>
-						<hr>
+							<% if @pending_performances.any? %>
+								<% if @pending_performances.include?(perf) == false %>
+									<%= perf.performance_date.strftime("%m/%d/%Y") %> <br> <span><%= perf.location %></span>
+									<hr>
+								<% end %>
+							<% end %>
 						<% end %>
 					</div>
 				</div>
@@ -43,10 +47,13 @@
 					<br>
 					<br>
 					<div class="card-body">
-						<% tour.performances.where(status: 'pending').each do |perf| %>
-						<%= perf.performance_date.strftime("%m/%d/%Y") %> <br> 
-						<span><%= perf.location %></span>
-						<hr>
+						<% tour.performances.where(status: 'scheduled').each do |perf| %>
+							<% if @pending_performances.any? %>
+								<% if @pending_performances.include?(perf) %>
+									<%= perf.performance_date.strftime("%m/%d/%Y") %> <br> <span><%= perf.location %></span>
+									<hr>
+								<% end %>
+							<% end %>
 						<% end %>
 					</div>
 				</div>

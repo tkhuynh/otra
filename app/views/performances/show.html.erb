@@ -24,7 +24,7 @@
 					<% pending_performance = request.performance %>
 					<% if current_user.type == "Band" and request.status == "pending" %>
 						<% if request.requester_id == current_user.id  %>
-							<%= request.show.host.name %> - <i>Your request is pending</i>
+							 <p>Your request with <%= request.show.host.name %> is pending</p>
 						<% else %>
 							<%= request.show.host.name %>
 							<%= form_for pending_performance, method: :put do |f| %>

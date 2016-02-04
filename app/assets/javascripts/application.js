@@ -54,67 +54,47 @@ $(function() {
 	var geocoder;
 	var map;
 	geocoder = new google.maps.Geocoder();
-	function initialize(mapid) {
+	var markers = [];
+	function initialize(mapId) {
 		var center = new google.maps.LatLng(38.50033, -97.6500523);
-		map = new google.maps.Map(document.getElementById(mapid), {
+		map = new google.maps.Map(document.getElementById(mapId), {
 			center: center,
 			zoom: 4,
 			mapTypeId: google.maps.MapTypeId.ROADMAP,
 			scrollwheel: false
 		});
-		var markers = [];
-		$.get("/band_dashboard.json", function(data) {
-			data.forEach(function (cities) {
-				cities[1].forEach(function(city) {
-					console.log(cities);
-					var cityName = city.location;
-					console.log(cityName);
-					if (cityName !== undefined) {
-						geocoder.geocode({'address': cityName}, function(results, status) {
-							var latitude = results[0].geometry.location.lat();
-							var longitude = results[0].geometry.location.lng(); 
-							var marker = new google.maps.Marker({
-								position: new google.maps.LatLng(latitude, longitude),
-								map: map,
-								title: city.location + ' - ' + city.performance_date,
-								icon: 'http://icons.iconarchive.com/icons/glyphish/glyphish/32/07-map-marker-icon.png'
-							});
-							markers.push(marker);
-						});
-					}
+	function get_marker(city) {
+		var cityName = city.location;
+		if (cityName !== undefined) {geocoder.geocode({
+				'address': cityName
+				}, function(results, status) {
+					var latitude = results[0].geometry.location.lat();
+					var longitude = results[0].geometry.location.lng();
+					var marker = new google.maps.Marker({
+						position: new google.maps.LatLng(latitude, longitude),
+						map: map,
+						title: city.location + ' - ' + city.performance_date,
+						icon: 'http://icons.iconarchive.com/icons/glyphish/glyphish/32/07-map-marker-icon.png'
+					});
+					markers.push(marker);
 				});
-			});
-			$("body").on("click", ".view-map", function (e) {
-				// clear markers
-				for (var i = 0; i < markers.length; i++) {
-            markers[i].setMap(null);
-        }
-        markers = [];
-				var tour_index = $(".view-map").index(this);
-				data[tour_index][1].forEach(function(city) {
-					var cityName = city.location;
-					if (cityName !== undefined) {
-						geocoder.geocode({'address': cityName}, function(results, status) {
-							var latitude = results[0].geometry.location.lat();
-							var longitude = results[0].geometry.location.lng(); 
-							var marker = new google.maps.Marker({
-								position: new google.maps.LatLng(latitude, longitude),
-								map: map,
-								title: city.location + ' - ' + city.performance_date,
-								icon: 'http://icons.iconarchive.com/icons/glyphish/glyphish/32/07-map-marker-icon.png'
-							});
-							markers.push(marker);
-						});
-					}
-				});
-				$("body").animate({scrollTop:0}, '500', 'swing');
+			}
+		}	
+	}
+	$.get("/band_dashboard.json", function(data) {
+
+		$("body").on("click", ".view-map", function(e) {
+			for (var i = 0; i < markers.length; i++) {
+				markers[i].setMap(null);
+			}
+			markers = [];
+			var tour_index = $(".view-map").index(this);
+			var mapId = "map" + tour_index;
+			initialize(mapId);
+			data[tour_index][1].forEach(get_marker);
 			});
 
 		});
-	}
-
-	google.maps.event.addDomListener(window, 'load', initialize);
-
 	// tab for group shows and group performances
 	$(".date-tab").first().addClass("active");
 	$(".tab-pane").first().addClass("in active");
