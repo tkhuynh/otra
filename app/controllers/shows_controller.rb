@@ -43,7 +43,7 @@ class ShowsController < ApplicationController
   def show
     @request = Request.new
     @confirmed_requests = Request.where({status: "confirmed", show_id: @show.id})
-    @pending_requests = Request.all.where({status: "pending", show_id: @show.id})
+    @pending_requests = Request.where({status: "pending", show_id: @show.id})
     if current_user
       if current_user.type == "Band" and @match_shows.any? {|show| show = @show}
         host_requests_for_band = Request.where({requester_id: @show.host.id, show_id: @show.id, status: "pending"})

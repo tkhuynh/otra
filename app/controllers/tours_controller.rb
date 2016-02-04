@@ -27,7 +27,7 @@ class ToursController < ApplicationController
       if tour_params.has_key?("performances_attributes")
     		if @tour.save
     			flash[:notice] = "Successfully created a tour."
-    			redirect_to tour_path(@tour)
+    			redirect_to band_dashboard_path
     		else
     			flash[:errors] = @tour.errors.full_messages.join(", ")
     			render action: :new
