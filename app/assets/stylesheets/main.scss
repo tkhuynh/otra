@@ -336,3 +336,27 @@ label {
   margin-bottom: 0px;
   border-radius: 0px;
 }
+
+/* user profile */
+.user-avatar {
+	height: 250px;
+}
+#user {
+	.shadowbox {
+		box-shadow: none;
+	}
+	a {
+		text-decoration: none;
+		color: $otra-purple;
+		&:hover {
+			color: $otra-lightpurple
+		};
+	}
+	.user-container {
+		width: 300px;
+		border: 2px solid $otra-purple;
+		h3, h4 {
+		 color: $otra-purple;
+		}
+	}
+}

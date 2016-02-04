@@ -4,10 +4,14 @@ class PerformancesController < ApplicationController
   before_action :matching_performances, only: [:index, :show]
 
   def index
-    @match_performances.sort_by! {|x| [x[0] - Date.today]}
-    if current_user.type == "Band" 
-      all_performances = current_user.performances
-      render json: all_performances
+
+    if current_user.type == "Host" and @match_performances.empty?
+      flash[:errors] = "There aren't any performances matches any of your shows."
+      redirect_to host_path(current_user)
+    elsif current_user.type == "Host" and @match_performances.any?
+      @match_performances.sort_by! {|x| [x[0] - Date.today]}
+    elsif current_user.type == "Band"
+      redirect_to band_path(current_user)
     end
   end
 
@@ -52,6 +56,7 @@ class PerformancesController < ApplicationController
             show_pending_requests.each do |pending_request|
               pending_request.update_attributes({status: "denied"})
             end
+            flash[:notice] = "You have confirmed request from " + request.performance.band.name
             redirect_to show_path(request.show_id)
           else
             redirect_to show_path(request.show_id)
@@ -67,6 +72,7 @@ class PerformancesController < ApplicationController
       elsif params[:commit] == "Deny"
         if current_user.type == "Host"
           request.update_attributes({status: "denied"})
+          flash[:notice] = "You have denied request from " + request.performance.band.name
           redirect_to show_path(request.show_id)
         else
           flash[:notice] = "You have denied a request from " + request.show.venue

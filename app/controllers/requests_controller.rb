@@ -4,10 +4,10 @@ class RequestsController < ApplicationController
     @request = Request.create(request_params)
     if current_user.type == "Host"
     	flash[:notice] = "Your request has sent to " + @request.performance.band.name
-    	redirect_to show_path(@request.show_id)
+    	redirect_to host_dashboard_path
     else
     	flash[:notice] = "Your request has sent to " + @request.show.venue
-    	redirect_to performance_path(@request.performance_id)
+    	redirect_to band_dashboard_path
     end
   end
 
