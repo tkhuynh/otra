@@ -19,9 +19,9 @@ class UsersController < ApplicationController
         session[:user_id] = @user.id
         flash[:notice] = "Successfully signed up."
         if @user.type == "Host"
-          redirect_to host_path(@user)
+          redirect_to host_dashboard_path
         elsif @user.type == "Band"
-          redirect_to band_path(@user)
+          redirect_to band_dashboard_path
         end
       else
         flash[:error] = @user.errors.full_messages.join(', ')

@@ -5,19 +5,23 @@
 				<h2 class="headers"><%= @band.name %></h2>
 				<br>
 				<br>
-				<%= image_tag @band.avatar.url(:thumb), class: "img-responsive user-avatar"%>
-				<h4>&emsp;<span class="glyphicon glyphicon-envelope"> <%= @band.email %></h4>
-				<h4>&emsp;<span class="glyphicon glyphicon-globe"> <%= @band.location %></h4>
-				<h4>&emsp;<span class="glyphicon glyphicon-music"></span> 
-					<% if @band.about == nil and current_user.type == "Band" %>
-						<%= link_to "Please Update", edit_user_path %>
-					<% else %>
-						<%= @band.about %>
+				<div class="profile-side-bar">
+					<div class="flyer" style="border: none;">
+						<%= image_tag @band.avatar.url(:medium), class: "img-responsive user-avatar"%>	
+					</div>
+					<h4>&emsp;<span class="glyphicon glyphicon-envelope"></span> <%= @band.email %></h4>
+					<h4>&emsp;<span class="glyphicon glyphicon-globe"></span> <%= @band.location %></h4>
+					<h4>&emsp;<span class="glyphicon glyphicon-music"></span> 
+						<% if @band.about == nil and current_user.type == "Band" %>
+							<%= link_to "Please Update", edit_user_path %>
+						<% else %>
+							<%= @band.about %>
+						<% end %>
+						</h4>
+					<% if current_user.type == "Host" %>
+						<h3>&emsp;<%= link_to "Find Performance", performances_path %></h3>
 					<% end %>
-					</h4>
-				<% if current_user.type == "Host" %>
-					<h3>&emsp;<%= link_to "Find Performance", performances_path %></h3>
-				<% end %>
+				</div>
 			</div>
 		</div>
 		<div class="col-md-8">
