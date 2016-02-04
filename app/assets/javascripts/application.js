@@ -63,12 +63,12 @@ $(function() {
 			scrollwheel: false
 		});
 		var markers = [];
-		$.get("/dashboard.json", function(data) {
+		$.get("/band_dashboard.json", function(data) {
 			data.forEach(function (cities) {
 				cities[1].forEach(function(city) {
-					console.log(cities)
+					console.log(cities);
 					var cityName = city.location;
-					console.log(cityName)
+					console.log(cityName);
 					if (cityName !== undefined) {
 						geocoder.geocode({'address': cityName}, function(results, status) {
 							var latitude = results[0].geometry.location.lat();

@@ -1,22 +1,29 @@
-<div class="welcome text-center"><br><br><br>
-	<img class="logo" alt="Logo" src="/assets/otra-01" /><br>
-	<div class="tagline">
-		On the road again?
+<div class="container-fluid" style="padding: 0">
+	<div class="row">
+	<div class="col-md-12">
+		<div class="welcome text-center"><br><br><br>
+			<%= image_tag "otra-01.png", class: "logo" %>
+			<div class="tagline">
+				On the road again?
+			</div>
+			<br>
+		</div>
 	</div>
-	<br>
 </div>
 <div class="row">
 	<div class="info text-center">
 		<div class="col-md-12">
-			<div class="col-md-8 col-md-offset-2">
-				<hr>
-				<div class="info-header">
-					LET US DO SOME HEAVY LIFTING
+			<div class="row">
+				<div class="col-md-8 col-md-offset-2">
+					<hr>
+					<div class="info-header">
+						LET US DO SOME HEAVY LIFTING
+					</div>
+					<hr>
+					<h3>Otra provides a platform for touring bands and independent show hosts to connect efficiently and painlessly</h3>
+					<a class="glyphicon glyphicon-chevron-down down-arrow" href="#how-it-work"></a>
+					<br>
 				</div>
-				<hr>
-				<h3>Otra provides a platform for touring bands and independent show hosts to connect efficiently and painlessly</h3>
-				<a class="glyphicon glyphicon-chevron-down down-arrow" href="#how-it-work"></a>
-				<br>
 			</div>
 		</div>
 	</div>
@@ -24,8 +31,8 @@
 <section id="how-it-work">
 	<div class="row">
 		<div class="band-how-it-works">
-			<div class="col-md-4 col-md-offset-1">
-				<img class="logo logo-info" alt="LogoBands" src="/assets/otraband-01" /><br>
+			<div class="col-md-6">
+				<%= image_tag "otraband-01.png", class: "logo logo-info" %>
 				<hr>
 				<div class="tagline image-labels text-center"><a href="#signup", class="band-signup">BANDS</a></div>
 				<hr>
@@ -33,8 +40,8 @@
 					<h4><strong><a href="#signup", class="band-signup">Signup</a></strong> as a band and get started by creating a tour route and connecting with hosts!</h4>
 				<% end %>
 			</div>
-			<div class="col-md-4 col-md-offset-2">
-				<img class="logo logo-info" alt="LogoBands" src="/assets/otrahosts-01" />
+			<div class="col-md-6">
+				<%= image_tag "otrahosts-01.png", class: "logo logo-info" %>
 				<hr>
 				<div class="tagline image-labels text-center"><a href="#signup", class="host-signup">HOSTS</a></div>
 				<hr>
@@ -89,3 +96,4 @@
 		</div>
 	</section>
 <% end %>
+</div>
