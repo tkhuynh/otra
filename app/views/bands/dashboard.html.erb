@@ -5,13 +5,12 @@
 			<div class="img-rounded">
 				<%= image_tag @band.avatar.url(:medium), class: "img-responsive avatar image-resize"%>
 			</div>
-			<div class="container">
+			<div class="user-bar-pad">
 				<br>
 				<%= @band.email %><br>
 				<%= @band.location %><br><br>
-				<%= link_to "Add Tour", new_tour_path %>
-				<br>
-				<%= link_to "Find Venue", shows_path %>
+				<h1><%= link_to "Add Tour", new_tour_path %></h1>
+				<h1><%= link_to "Find Venue", shows_path %></h1>
 			</div>
 		</div>
 	</div>
@@ -45,7 +44,7 @@
 					<br>
 					<div class="card-body">
 						<% tour.performances.where(status: 'pending').each do |perf| %>
-						<%= perf.performance_date.strftime("%m/%d/%Y") %> <br> 
+						<%= Request.all.where({status: "pending", performance_id: perf.id})[0].performance.performance_date.strftime("%m/%d/%Y") %>
 						<span><%= perf.location %></span>
 						<hr>
 						<% end %>

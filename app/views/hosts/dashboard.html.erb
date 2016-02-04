@@ -1,16 +1,37 @@
-<div class="container">
+<div class="col-xs-3" style="
+    margin-left: -15px;" >
+	<div class="user-sidebar shadowbox">
+		<h1 class="headers"><%= @host.name %></h1>
+		<div class="img-rounded">
+			<%= image_tag @host.avatar.url(:medium), class: "img-responsive avatar image-resize"%>
+		</div>
+			<br>
+			<%= @host.email %><br>
+			<%= @host.location %><br><br>
+			<%= link_to "Add Show", new_show_path %>
+			<br>
+			<%= link_to "Find Bands", performances_path %>
+	</div>
+</div>
+<div class="col-xs-9">
 	<div class="dashboard-content">
 		<% @host.shows.each do |show| %>
 			<div class="col-xs-4">
 				<div class="shadowbox">
-					<div class="card-body">
 					<h3 class="headers">
-					<%= show.venue %>
+						<%= show.venue %>
 					</h3>
 					<br>
 					<br>
-						<% show.show_date.strftime("%m/%d/%Y") %> <br> <span><%= show.location %></span>
+					<div class="card-body">
+
+					<div class="flyer">
+						<%= image_tag show.flyer.url(:medium) %>
+					</div>
+						<%= show.show_date.strftime("%m/%d/%Y") %> <br> <span><%= show.location %></span>
 						<hr>
+						<%= link_to "View details", show_path(show) %><br>
+						<%= link_to "Edit", edit_show_path(show) %>
 					</div>
 				</div>
 			</div>
