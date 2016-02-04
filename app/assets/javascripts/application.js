@@ -22,13 +22,13 @@ $(function() {
 		// $(this).prev("input[type=hidden]").value = "1";
 		$(this).hide().prevAll().remove();
 	});
-	$("#add").click(function (e) {
+	$("#add").click(function(e) {
 		var clone_form_index = $(".fields").length + 1;
 		var new_form = $(".fields").last().clone().attr("class", "fields");
 		new_form.find("select").addClass("date_input");
 		new_form.find(".location_label").attr("for", "tour_performances_attributes_" + clone_form_index + "_location");
-    new_form.find(".location_input").attr("id", "tour_performances_attributes_" + clone_form_index + "_location").attr("name", "tour[performances_attributes][" + clone_form_index + "][location]").val("");
-		
+		new_form.find(".location_input").attr("id", "tour_performances_attributes_" + clone_form_index + "_location").attr("name", "tour[performances_attributes][" + clone_form_index + "][location]").val("");
+
 		new_form.find(".date_label").attr("for", "tour_performances_attributes_" + clone_form_index + "_performance_date");
 		new_form.find("select").first().attr("id", "tour_performances_attributes_" + clone_form_index + "_performance_date_1i").attr("name", "tour[performances_attributes][" + clone_form_index + "][performance_date(1i)]");
 		new_form.find("select").first().next().attr("id", "tour_performances_attributes_" + clone_form_index + "_performance_date_2i").attr("name", "tour[performances_attributes][" + clone_form_index + "][performance_date(2i)]");
@@ -42,19 +42,22 @@ $(function() {
 	// Geocomplete
 	function onGeocomplete() {
 		var options = {
-		          types: ['(cities)'],
-		          componentRestrictions: {country: "usa"}
-		      };
+			types: ['(cities)'],
+			componentRestrictions: {
+				country: "usa"
+			}
+		};
 		$(".city_stops").geocomplete(options);
 	}
 
 	onGeocomplete();
-	
+
 	// Google Map
 	var geocoder;
 	var map;
 	geocoder = new google.maps.Geocoder();
 	var markers = [];
+
 	function initialize(mapId) {
 		var center = new google.maps.LatLng(38.50033, -97.6500523);
 		map = new google.maps.Map(document.getElementById(mapId), {
@@ -63,25 +66,49 @@ $(function() {
 			mapTypeId: google.maps.MapTypeId.ROADMAP,
 			scrollwheel: false
 		});
+	}
+
 	function get_marker(city) {
 		var cityName = city.location;
-		if (cityName !== undefined) {geocoder.geocode({
+		if (cityName !== undefined) {
+			geocoder.geocode({
 				'address': cityName
-				}, function(results, status) {
-					var latitude = results[0].geometry.location.lat();
-					var longitude = results[0].geometry.location.lng();
-					var marker = new google.maps.Marker({
-						position: new google.maps.LatLng(latitude, longitude),
-						map: map,
-						title: city.location + ' - ' + city.performance_date,
-						icon: 'http://icons.iconarchive.com/icons/glyphish/glyphish/32/07-map-marker-icon.png'
-					});
-					markers.push(marker);
+			}, function(results, status) {
+				var latitude = results[0].geometry.location.lat();
+				var longitude = results[0].geometry.location.lng();
+				var marker = new google.maps.Marker({
+					position: new google.maps.LatLng(latitude, longitude),
+					map: map,
+					title: city.location + ' - ' + city.performance_date,
+					icon: 'http://icons.iconarchive.com/icons/glyphish/glyphish/32/07-map-marker-icon.png'
 				});
-			}
-		}	
+				markers.push(marker);
+			});
+		}
+	}
+	function get_marker_without_save(city) {
+		var cityName = city.location;
+		if (cityName !== undefined) {
+			geocoder.geocode({
+				'address': cityName
+			}, function(results, status) {
+				var latitude = results[0].geometry.location.lat();
+				var longitude = results[0].geometry.location.lng();
+				var marker = new google.maps.Marker({
+					position: new google.maps.LatLng(latitude, longitude),
+					map: map,
+					title: city.location + ' - ' + city.performance_date,
+					icon: 'http://icons.iconarchive.com/icons/glyphish/glyphish/32/07-map-marker-icon.png'
+				});
+			});
+		}
+	}
+	for (var i = 1; i < $(".map").length; i++) {
+		$("#map" + i).hide();
 	}
 	$.get("/band_dashboard.json", function(data) {
+		initialize("map0");
+		data[0][1].forEach(get_marker_without_save);
 
 		$("body").on("click", ".view-map", function(e) {
 			for (var i = 0; i < markers.length; i++) {
@@ -90,25 +117,22 @@ $(function() {
 			markers = [];
 			var tour_index = $(".view-map").index(this);
 			var mapId = "map" + tour_index;
+			$("#" + mapId).toggle();
 			initialize(mapId);
 			data[tour_index][1].forEach(get_marker);
-			});
-
 		});
+	});
 	// tab for group shows and group performances
 	$(".date-tab").first().addClass("active");
 	$(".tab-pane").first().addClass("in active");
 
 	// signup form
-	$(".host-signup").click(function (e) {
+	$(".host-signup").click(function(e) {
 		$("#signup").show();
 		$("#role").val("Host");
 	});
-	$(".band-signup").click(function (e) {
+	$(".band-signup").click(function(e) {
 		$("#signup").show();
 		$("#role").val("Band");
 	});
 });
-
-
-
