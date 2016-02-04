@@ -72,19 +72,20 @@ class ShowsController < ApplicationController
   end
 
   def update
-    @pending_performances = Performance.all.where({status: "pending", show_id: @show.id})
-    if current_user.type == "Band" and @match_shows.include?(@show)
-      @performance = current_user.performances.where(performance_date: @show.show_date)[0]
-      @performance.update_attributes({status: "pending", requester_id: current_user.id, show_id: @show.id})
-      redirect_to band_path(current_user)
-    elsif current_user.type == "Host" and current_user.id == @show.host_id
+    # @pending_performances = Performance.all.where({status: "pending", show_id: @show.id})
+    # if current_user.type == "Band" and @match_shows.include?(@show)
+    #   @performance = current_user.performances.where(performance_date: @show.show_date)[0]
+    #   @performance.update_attributes({status: "pending", requester_id: current_user.id, show_id: @show.id})
+    #   redirect_to band_path(current_user)
+    if current_user.type == "Host" and current_user.id == @show.host_id
       if @show.update_attributes(show_params)
+        byebug
         flash[:notice] = "Successfully updated show."
-        if current_user.type == "Host"
+        # if current_user.type == "Host"
           redirect_to host_dashboard_path(@user)
-        elsif current_user.type == "Band"
-          redirect_to band_path(@user)
-        end
+        # elsif current_user.type == "Band"
+          # redirect_to band_path(@user)
+        # end
       else
         flash[:error] = @show.errors.full_messages.join(', ')
         redirect_to edit_show_path(@show)

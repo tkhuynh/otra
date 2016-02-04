@@ -56,6 +56,7 @@ class PerformancesController < ApplicationController
             show_pending_requests.each do |pending_request|
               pending_request.update_attributes({status: "denied"})
             end
+            flash[:notice] = "You have confirmed request from " + request.performance.band.name
             redirect_to show_path(request.show_id)
           else
             redirect_to show_path(request.show_id)
@@ -71,6 +72,7 @@ class PerformancesController < ApplicationController
       elsif params[:commit] == "Deny"
         if current_user.type == "Host"
           request.update_attributes({status: "denied"})
+          flash[:notice] = "You have denied request from " + request.performance.band.name
           redirect_to show_path(request.show_id)
         else
           flash[:notice] = "You have denied a request from " + request.show.venue
