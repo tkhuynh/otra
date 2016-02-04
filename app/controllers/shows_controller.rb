@@ -79,7 +79,6 @@ class ShowsController < ApplicationController
     #   redirect_to band_path(current_user)
     if current_user.type == "Host" and current_user.id == @show.host_id
       if @show.update_attributes(show_params)
-        byebug
         flash[:notice] = "Successfully updated show."
         # if current_user.type == "Host"
           redirect_to host_dashboard_path(@user)
