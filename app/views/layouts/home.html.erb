@@ -1,91 +1,99 @@
-<div class="welcome text-center"><br><br><br>
-	<img class="logo" alt="Logo" src="/assets/otra-01" /><br>
-	<div class="tagline">
-		On the road again?
-	</div>
-	<br>
-</div>
-<div class="row">
-	<div class="info text-center">
+<div class="container-fluid" style="padding: 0">
+	<div class="row">
 		<div class="col-md-12">
-			<div class="col-md-8 col-md-offset-2">
-				<hr>
-				<div class="info-header">
-					LET US DO SOME HEAVY LIFTING
+			<div class="welcome text-center"><br><br><br>
+				<%= image_tag "otra-01.png", class: "logo" %>
+				<div class="tagline">
+					On the road again?
 				</div>
-				<hr>
-				<h3>Otra provides a platform for touring bands and independent show hosts to connect efficiently and painlessly</h3>
-				<a class="glyphicon glyphicon-chevron-down down-arrow" href="#how-it-work"></a>
 				<br>
 			</div>
 		</div>
 	</div>
-</div>
-<section id="how-it-work">
 	<div class="row">
-		<div class="band-how-it-works">
-			<div class="col-md-4 col-md-offset-1">
-				<img class="logo logo-info" alt="LogoBands" src="/assets/otraband-01" /><br>
-				<hr>
-				<div class="tagline image-labels text-center"><a href="#signup", class="band-signup">BANDS</a></div>
-				<hr>
-				<% if !current_user %>
-					<h4><strong><a href="#signup", class="band-signup">Signup</a></strong> as a band and get started by creating a tour route and connecting with hosts!</h4>
-				<% end %>
-			</div>
-			<div class="col-md-4 col-md-offset-2">
-				<img class="logo logo-info" alt="LogoBands" src="/assets/otrahosts-01" />
-				<hr>
-				<div class="tagline image-labels text-center"><a href="#signup", class="host-signup">HOSTS</a></div>
-				<hr>
-				<% if !current_user %>
-					<h4><strong><a href="#signup", class="host-signup">Signup</a></strong> as a host and get started by creating some shows and connecting with bands!</h4>
-				<% end %>
-			</div>
-		</div>
-	</div>
-</section>
-
-<% if !current_user %>
-	<section id="signup" hidden>
-		<div class="row">
-			<div class="col-xs-6 col-xs-offset-3">
-				<div class="signup-form">
-					<h3 class="text-center form-title">Get Started</h3>
-					<div class="row">
-						<div class="col-xs-10 col-xs-offset-1">
-							<%= form_for :user, url: users_path, method: :post, html: { multipart: true } do |f| %>
-							<div class="form-group">
-								<%=  f.label :name %>
-								<%=  f.text_field :name, class: "form-control", autofocus: true %>
-							</div>
-							<div class="form-group">
-								<%=  f.label :email %>
-								<%=  f.email_field :email, class: "form-control" %>
-							</div>
-							<div class="form-group">
-								<%=  f.label :location %>
-								<%=  f.text_field :location, class: "form-control city_stops" %>
-							</div>
-							<div class="form-group">
-								<%=  f.hidden_field :type, id: "role" %>
-							</div>
-							<div class="form-group">
-								<%=  f.label :password %>
-								<%=  f.password_field :password, class: "form-control" %>
-							</div>
-							<div class="form-group">
-								<%=  f.label :password_confirmation %>
-								<%=  f.password_field :password_confirmation, class: "form-control" %>
-							</div>
-							<div class="form-group text-center">
-								<%= f.submit "Sign Up", class: "btn btn-primary form-control" %>
-							</div>
-						<% end %>
+		<div class="info text-center">
+			<div class="col-md-12">
+				<div class="row">
+					<div class="col-md-8 col-md-offset-2">
+						<hr>
+						<div class="info-header">
+							LET US DO SOME HEAVY LIFTING
 						</div>
+						<hr>
+						<h3>Otra provides a platform for touring bands and independent show hosts to connect efficiently and painlessly</h3>
+						<a class="glyphicon glyphicon-chevron-down down-arrow" href="#how-it-work"></a>
+						<br>
 					</div>
 				</div>
 			</div>
 		</div>
+	</div>
+	<section id="how-it-work">
+		<div class="row">
+			<div class="band-how-it-works">
+				<div class="col-md-6">
+					<%= image_tag "otraband-01.png", class: "logo logo-info" %>
+					<hr>
+					<div class="tagline image-labels text-center"><a href="#signup", class="band-signup">BANDS</a></div>
+					<hr>
+					<% if !current_user %>
+						<h4><strong><a href="#signup", class="band-signup">Signup</a></strong> as a band and get started by creating a tour route and connecting with hosts!</h4>
+					<% end %>
+				</div>
+				<div class="col-md-6">
+					<%= image_tag "otrahosts-01.png", class: "logo logo-info" %>
+					<hr>
+					<div class="tagline image-labels text-center"><a href="#signup", class="host-signup">HOSTS</a></div>
+					<hr>
+					<% if !current_user %>
+						<h4><strong><a href="#signup", class="host-signup">Signup</a></strong> as a host and get started by creating some shows and connecting with bands!</h4>
+					<% end %>
+				</div>
+			</div>
+		</div>
 	</section>
-<% end %>
+
+	<% if !current_user %>
+		<section id="signup" hidden>
+			<div class="row">
+				<div class="col-xs-6 col-xs-offset-3">
+					<div class="signup-form">
+						<h3 class="text-center form-title">Get Started</h3>
+						<div class="row">
+							<div class="col-xs-10 col-xs-offset-1">
+								<%= form_for :user, url: users_path, method: :post, html: { multipart: true } do |f| %>
+								<div class="form-group">
+									<%=  f.label :name %>
+									<%=  f.text_field :name, class: "form-control", autofocus: true %>
+								</div>
+								<div class="form-group">
+									<%=  f.label :email %>
+									<%=  f.email_field :email, class: "form-control" %>
+								</div>
+								<div class="form-group">
+									<%=  f.label :location %>
+									<%=  f.text_field :location, class: "form-control city_stops" %>
+								</div>
+								<div class="form-group">
+									<%=  f.hidden_field :type, id: "role" %>
+								</div>
+								<div class="form-group">
+									<%=  f.label :password %>
+									<%=  f.password_field :password, class: "form-control" %>
+								</div>
+								<div class="form-group">
+									<%=  f.label :password_confirmation %>
+									<%=  f.password_field :password_confirmation, class: "form-control" %>
+								</div>
+								<div class="form-group text-center">
+									<%= f.submit "Sign Up", class: "btn btn-primary form-control" %>
+								</div>
+							<% end %>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	<% end %>
+</div>
