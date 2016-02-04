@@ -199,7 +199,7 @@ label {
 	color: $otra-purple;
 	background-color: $otra-offwhite;
 	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
-	position: absolute;
+	position: fixed;
 	z-index: 1000;
 	width: 325px;
 	a {
@@ -217,12 +217,6 @@ label {
 
 .dashboard-content {
 	background-color: $otra-offwhite;
-	padding-left: 20px;
-	padding-right: 20px;
-	margin-left: -40px;
-	overflow-y: scroll;
-	overflow-x: hidden;
-	height:100vh;
 }
 
 @media (max-width: 768px) {
@@ -240,24 +234,18 @@ label {
 
 .flyer {
 	border: 3px solid $otra-purple;
-	position: relative;
 	height: 198px;
-	width: 85%;
+	width: 100%;
 	background-color: $otra-lightpurple;
-  margin-left: auto;
-  margin-right: auto;
   overflow: hidden;
+  display: flex; 
+  justify-content: center; 
+  align-items: center;
 }
 
 .flyer img {
-  position: absolute;
-  margin: auto;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+	width: 300px;
 }
-
 
 .img-rounded {
 	border: 2px solid $otra-purple;
