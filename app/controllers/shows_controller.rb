@@ -48,7 +48,8 @@ class ShowsController < ApplicationController
       if current_user.type == "Band" and @match_shows.any? {|show| show = @show}
         host_requests_for_band = Request.where({requester_id: @show.host.id, show_id: @show.id, status: "pending"})
         @host_single_request = host_requests_for_band.select { |hostreq| hostreq.performance.band_id == current_user.id }
-        @band_request = Request.where({requester_id: current_user.id, show_id: @show.id, status: "denied"})
+        @band_pending_request = @pending_requests.where(requester_id: current_user.id)
+        @band_denied_request = Request.where({requester_id: current_user.id, show_id: @show.id, status: "denied"})
         @show
       elsif current_user.type == "Host" and current_user.id == @show.host_id
         @show

@@ -62,7 +62,8 @@ hr{
 }
 
 .logo-info {
-	margin-left: 95px;
+	display: block;
+	margin: 0 auto;
 }
 
 .tagline {
@@ -190,7 +191,23 @@ label {
 	padding: 10px 0px 10px 0px;
 }
 
+.login-form-holder {
+	display: flex;
+	justify-content: center;
+	transform-style: preserve-3d;
+}
+.login-form {
+	align-self: center;
+	position: relative;
+	top: 50;
+	transform: translateY(25%);
+}
+
 /*dashboard*/
+
+.performance-tags {
+	margin-top: 30px;
+}
 
 .user-sidebar {
 	padding-top: 40px;
@@ -262,8 +279,10 @@ label {
 	overflow: hidden;
 }
 
-#map {
+.map {
 	margin-top: 30px !important;
+	margin-bottom: -30px;
+	height: 500px;
 }
 
 .shadowbox {
@@ -304,6 +323,7 @@ label {
 
 /* alert */
 .alert-info {
+	margin-top: 18px;
   background-color: #dff0d8;
   border-color: rgba(60, 118, 61, 0.23);
   color: #333;
@@ -312,6 +332,7 @@ label {
 }
 
 .alert-danger {
+	margin-top: 18px;
   margin-bottom: 0px;
   border-radius: 0px;
 }

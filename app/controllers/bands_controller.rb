@@ -10,8 +10,16 @@ class BandsController < ApplicationController
 
 	def dashboard
 		if current_user and current_user.type == "Band" 
+			@pending_performances = []
+			current_user.performances.each do |performance|
+				pending = performance.requests.where(status: "pending")
+				if pending.any?
+					@pending_performances << pending[0].performance
+				end
+			end
 			@band = Band.find(current_user.id)
-		  all_performances = current_user.performances
+		  all_performances = current_user.performances.group_by {|performance| performance.tour_id}.to_a
+		  all_performances.sort!
 		  respond_to do |format|
 		  	format.html{render :dashboard}
 		  	format.json{render json: all_performances}

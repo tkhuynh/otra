@@ -18,15 +18,16 @@
 							</ul>
 						<% end %>
 					<% end %>
-						<% if @show.slots > @confirmed_requests.count and current_user.type == "Band" and @band_request.empty? %>
+						<% if @show.slots > @confirmed_requests.count and current_user.type == "Band" and @band_denied_request.empty? and @band_pending_request.empty? %>
+							<!-- if host hasn't requested band -->
 							<% if @host_single_request.empty? %>
 								<%= form_for @request do |f| %>
-								<%= f.hidden_field :status, value: "pending" %>
-								<%= f.hidden_field :requester_id, value: current_user.id %>
-								<% this_band_performance = current_user.performances.where({status: "scheduled", performance_date: @show.show_date, location: @show.location})[0] %>
-								<%= f.hidden_field :performance_id, value: this_band_performance.id %>
-								<%= f.hidden_field :show_id, value: @show.id %>
-								<%= f.submit "Request Slot", class: "btn btn-primary" %>
+									<%= f.hidden_field :status, value: "pending" %>
+									<%= f.hidden_field :requester_id, value: current_user.id %>
+									<% this_band_performance = current_user.performances.where({status: "scheduled", performance_date: @show.show_date, location: @show.location})[0] %>
+									<%= f.hidden_field :performance_id, value: this_band_performance.id %>
+									<%= f.hidden_field :show_id, value: @show.id %>
+									<%= f.submit "Request Slot", class: "btn btn-primary" %>
 								<% end %>
 						<% else %>
 							Host already wants you to play this show, <br>
@@ -56,7 +57,7 @@
 					<% end %>
 					<% end %>
 					<% end %>
-					<% if current_user.type == "Band" and @band_request.any? and @band_request[0].status == "denied" %>
+					<% if current_user.type == "Band" and @band_denied_request.any? and @band_denied_request[0].status == "denied" %>
 					<h2>You have been denied by the host.</h2>
 					<% end %>
 				</div>
