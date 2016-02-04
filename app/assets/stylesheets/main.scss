@@ -199,7 +199,7 @@ label {
 	color: $otra-purple;
 	background-color: $otra-offwhite;
 	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
-	position: absolute;
+	position: fixed;
 	z-index: 1000;
 	width: 325px;
 	a {
@@ -211,14 +211,12 @@ label {
 	};
 }
 
+.user-bar-pad {
+	padding: 15px;
+}
+
 .dashboard-content {
 	background-color: $otra-offwhite;
-	padding-left: 20px;
-	padding-right: 20px;
-	margin-left: -40px;
-	overflow:auto;
-	overflow-x: hidden;
-	height:100vh;
 }
 
 @media (max-width: 768px) {
@@ -234,8 +232,23 @@ label {
 	}
 }
 
-.img-rounded {
+.flyer {
 	border: 3px solid $otra-purple;
+	height: 198px;
+	width: 100%;
+	background-color: $otra-lightpurple;
+  overflow: hidden;
+  display: flex; 
+  justify-content: center; 
+  align-items: center;
+}
+
+.flyer img {
+	width: 300px;
+}
+
+.img-rounded {
+	border: 2px solid $otra-purple;
 	border-radius: 50%;
 	margin-left: 22px;
 	margin-top: 37px;
@@ -258,6 +271,7 @@ label {
 }
 
 .card-body {
+	border: 1px solid $otra-purple;
 	background-color: $otra-lightestpurple;
 	color: $otra-purple;
 	font-family: 'modern_sansregular';
@@ -274,6 +288,18 @@ label {
 			color: $otra-lightpurple
 		};
 	}
+}
+
+/* show */
+
+.show-wrapper {
+	font-family: 'modern_sansregular';
+	color: $otra-purple;
+}
+
+.card-tag {
+	color: $otra-purple;
+	font-family: 'modern_sansregular';
 }
 
 /* alert */

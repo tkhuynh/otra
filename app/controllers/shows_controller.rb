@@ -30,7 +30,7 @@ class ShowsController < ApplicationController
   		@show = current_user.shows.new(show_params)
   		if @show.save 
   			flash[:notice] = "Successfully created a show."
-  			redirect_to host_path(current_user)
+  			redirect_to host_dashboard_path
   		else
   			flash[:errors] = @show.errors.full_messages.join(", ")
   			render action: :new
@@ -76,11 +76,21 @@ class ShowsController < ApplicationController
       @performance = current_user.performances.where(performance_date: @show.show_date)[0]
       @performance.update_attributes({status: "pending", requester_id: current_user.id, show_id: @show.id})
       redirect_to band_path(current_user)
-    # elsif current_user.type == "Host" and current_user.id == @show.host_id and @show.slots != 0
-    #   # a = params[:id]
-    #   # byebug # still in progress
-    #   @show.update_attributes(slots: @show.slots - 1)
-    #   redirect_to shows_path(@show)
+    elsif current_user.type == "Host" and current_user.id == @show.host_id
+      if @show.update_attributes(show_params)
+        flash[:notice] = "Successfully updated show."
+        if current_user.type == "Host"
+          redirect_to host_dashboard_path(@user)
+        elsif current_user.type == "Band"
+          redirect_to band_path(@user)
+        end
+      else
+        flash[:error] = @show.errors.full_messages.join(', ')
+        redirect_to edit_show_path(@show)
+      end
+    else 
+      #if someone else redirect to signup page
+      redirect_to signup_path
     end
   end
 
