@@ -200,7 +200,7 @@ label {
 	align-self: center;
 	position: relative;
 	top: 50;
-	transform: translateY(25%);
+	transform: translateY(50%);
 }
 
 /*dashboard*/
@@ -307,6 +307,11 @@ label {
 			color: $otra-lightpurple
 		};
 	}
+}
+
+.login-image {
+	height: 500px;
+	margin-top: 100px;
 }
 
 /* show */
