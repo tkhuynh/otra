@@ -358,10 +358,15 @@ label {
 		};
 	}
 	.user-container {
+		font-family: 'modern_sansregular';
 		width: 300px;
 		border: 2px solid $otra-purple;
 		h3, h4 {
 		 color: $otra-purple;
 		}
+	}
+
+	.font {
+		font-family: 'modern_sansregular';
 	}
 }

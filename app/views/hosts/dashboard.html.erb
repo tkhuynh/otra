@@ -5,12 +5,13 @@
 		<div class="img-rounded">
 			<%= image_tag @host.avatar.url(:medium), class: "img-responsive avatar image-resize"%>
 		</div>
+		<div class="user-bar-pad">
 			<br>
 			<%= @host.email %><br>
 			<%= @host.location %><br><br>
-			<%= link_to "Add Show", new_show_path %>
-			<br>
-			<%= link_to "Find Bands", performances_path %>
+			<h3><%= link_to "Add Show", new_show_path %></h3>
+			<h3><%= link_to "Find Bands", performances_path %></h3>
+		</div>
 	</div>
 </div>
 <div class="col-xs-9">

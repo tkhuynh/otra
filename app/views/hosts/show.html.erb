@@ -6,9 +6,9 @@
 				<br>
 				<br>
 				<%= image_tag @host.avatar.url(:thumb), class: "img-responsive user-avatar"%>
-				<h4>&emsp;<span class="glyphicon glyphicon-envelope"> <%= @host.email %></h4>
-				<h4>&emsp;<span class="glyphicon glyphicon-globe"> <%= @host.location %></h4>
-				<h4>&emsp;<span class="glyphicon glyphicon-music"></span> 
+				<h4 class="font">&emsp;<span class="glyphicon glyphicon-envelope"> <%= @host.email %></h4>
+				<h4 class="font">&emsp;<span class="glyphicon glyphicon-globe"> <%= @host.location %></h4>
+				<h4 class="font">&emsp;<span class="glyphicon glyphicon-music"></span> 
 					<% if @host.about == nil and current_user.type == "Host" %>
 						<%= link_to "Please Update", edit_user_path %>
 					<% else %>
