@@ -33,11 +33,9 @@
 						<br>
 						<div class="card-body">
 							<% tour.performances.where(status: 'scheduled').each do |perf| %>
-								<% if @pending_performances.any? %>
-									<% if @pending_performances.include?(perf) == false %>
-										<%= perf.performance_date.strftime("%m/%d/%Y") %> <br> <span><%= perf.location %></span>
-										<hr>
-									<% end %>
+								<% if @pending_performances.include?(perf) == false %>
+									<%= perf.performance_date.strftime("%m/%d/%Y") %> <br> <span><%= perf.location %></span>
+									<hr>
 								<% end %>
 							<% end %>
 						</div>

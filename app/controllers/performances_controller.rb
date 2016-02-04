@@ -4,10 +4,14 @@ class PerformancesController < ApplicationController
   before_action :matching_performances, only: [:index, :show]
 
   def index
-    @match_performances.sort_by! {|x| [x[0] - Date.today]}
-    if current_user.type == "Band" 
-      all_performances = current_user.performances
-      render json: all_performances
+
+    if current_user.type == "Host" and @match_performances.empty?
+      flash[:errors] = "There aren't any performances matches any of your shows."
+      redirect_to host_path(current_user)
+    elsif current_user.type == "Host" and @match_performances.any?
+      @match_performances.sort_by! {|x| [x[0] - Date.today]}
+    elsif current_user.type == "Band"
+      redirect_to band_path(current_user)
     end
   end
 

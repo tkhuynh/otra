@@ -8,7 +8,7 @@ class ShowsController < ApplicationController
       @match_shows.sort_by! {|x| [x[0] - Date.today]}
     else
       if current_user.type == "Band"
-        flash[:errors] = "There are any venues match any og your performances."
+        flash[:errors] = "There are any venues match any of your performances."
         redirect_to band_path(current_user)
       elsif current_user.type == "Host"
         redirect_to host_path(current_user)
