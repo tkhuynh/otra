@@ -36,16 +36,14 @@ class PerformancesController < ApplicationController
     else
       redirect_to signup_path
     end
-
   end
-
-
 
   def update
     this_show_id = params[:performance][:show_id]
     performance = Performance.find(params[:id])
     show_confirmed_requests = Request.where({status: "confirmed", show_id: this_show_id})
     request = Request.where({status: "pending", show_id: this_show_id, performance_id: performance.id})[0]
+
     if current_user && current_user.id != request.requester_id && performance.status == "scheduled"
       if params[:commit] == "Confirm"
         performance.update_attributes({status: "confirmed"})
@@ -67,7 +65,7 @@ class PerformancesController < ApplicationController
             each_request.update_attributes({status: "denied"})
           end
           flash[:notice] = "Performance on " + performance.performance_date.to_s + " will be at " + request.show.venue
-          redirect_to dashboard_path
+          redirect_to band_dashboard_path
         end
       elsif params[:commit] == "Deny"
         if current_user.type == "Host"
