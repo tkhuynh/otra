@@ -26,4 +26,3 @@ If you've tried to book a national tour as a small independent band you know the
 ![alt text](https://github.com/tkhuynh/project3/blob/minorfixes/app/assets/images/screenshots/OTRATOURSCREEN.png "Create Tour Route")
 
 ![alt text](https://github.com/tkhuynh/project3/blob/minorfixes/app/assets/images/screenshots/OTRAHOSTSCREEN.png "Host Dashboard")
-
