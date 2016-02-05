@@ -18,8 +18,12 @@ If you've tried to book a national tour as a small independent band you know the
 
 == Screenshots
 ![alt text](https://github.com/tkhuynh/project3/blob/minorfixes/app/assets/images/screenshots/OTRAHOMESCREEN.png "Home Page")
+
 ![alt text](https://github.com/tkhuynh/project3/blob/minorfixes/app/assets/images/screenshots/OTRASIGNUPSCREEN.png "Sign Up")
+
 ![alt text](https://github.com/tkhuynh/project3/blob/minorfixes/app/assets/images/screenshots/OTRABANDSCREEN.png "Band Dashboard")
+
 ![alt text](https://github.com/tkhuynh/project3/blob/minorfixes/app/assets/images/screenshots/OTRATOURSCREEN.png "Create Tour Route")
+
 ![alt text](https://github.com/tkhuynh/project3/blob/minorfixes/app/assets/images/screenshots/OTRAHOSTSCREEN.png "Host Dashboard")
 
