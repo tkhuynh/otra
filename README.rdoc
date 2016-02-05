@@ -13,7 +13,7 @@ If you've tried to book a national tour as a small independent band you know the
 == Planned Features
 * Internal messaging system to make for easier communication between bands and hosts
 * User verification and ratings
-* More inuitive mapping tools
+* More intuitive mapping tools
 * More detailed profile pages
 
 == Screenshots
