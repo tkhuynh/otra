@@ -16,5 +16,5 @@ If you've tried to book a national tour as a small independent band you know the
 * More inuitive mapping tools
 * More detailed profile pages
 
-![Alt text](https://github.com/tkhuynh/project3/blob/minorfixes/app/assets/images/screenshots/OTRAHOMESCREEN.png "Band Dashboard")
+![alt text](https://github.com/tkhuynh/project3/blob/minorfixes/app/assets/images/screenshots/OTRAHOMESCREEN.png "Band Dashboard")
 
