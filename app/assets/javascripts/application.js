@@ -68,6 +68,7 @@ $(function() {
 	var map;
 	geocoder = new google.maps.Geocoder();
 	var markers = [];
+	var tourPolylineCoordinates = [];
 
 	function initialize(mapId) {
 		var center = new google.maps.LatLng(38.50033, -97.6500523);
@@ -81,10 +82,12 @@ $(function() {
 
 	function get_marker(city) {
 		var cityName = city.location;
+		var performanceDate = city.performance_date;
 		if (cityName !== undefined) {
 			geocoder.geocode({
 				'address': cityName
 			}, function(results, status) {
+				// marker
 				var latitude = results[0].geometry.location.lat();
 				var longitude = results[0].geometry.location.lng();
 				var marker = new google.maps.Marker({
@@ -94,38 +97,66 @@ $(function() {
 					icon: 'http://icons.iconarchive.com/icons/glyphish/glyphish/32/07-map-marker-icon.png'
 				});
 				markers.push(marker);
-			});
-		}
-	}
-	function get_marker_without_save(city) {
-		var cityName = city.location;
-		if (cityName !== undefined) {
-			geocoder.geocode({
-				'address': cityName
-			}, function(results, status) {
-				var latitude = results[0].geometry.location.lat();
-				var longitude = results[0].geometry.location.lng();
-				var marker = new google.maps.Marker({
-					position: new google.maps.LatLng(latitude, longitude),
-					map: map,
-					title: city.location + ' - ' + city.performance_date,
-					icon: 'http://icons.iconarchive.com/icons/glyphish/glyphish/32/07-map-marker-icon.png'
+				// marker info window
+				var contentString = '<div id="content">' +
+					'<div id="siteNotice">' +
+					'</div>' +
+					'<h4 id="firstHeading" class="firstHeading">' + cityName.replace(/, United States/, "") +'</h4>' +
+					'<div id="bodyContent">' +
+					'<p>Performance Date: ' + performanceDate +'</p>' +
+					'</div>' +
+					'</div>';
+
+				var infowindow = new google.maps.InfoWindow({
+					content: contentString
 				});
+				marker.addListener('click', function() {
+			    infowindow.open(map, marker);
+			  });
+				// map polyline
+				tourPolylineCoordinates.push({
+					lat: latitude,
+					lng: longitude
+				});
+				var flightPath = new google.maps.Polyline({
+					path: tourPolylineCoordinates,
+					geodesic: true,
+					strokeColor: '#4E2B49',
+					strokeOpacity: 0.8,
+					strokeWeight: 2
+				});
+				// zoom map base on lat and long of PolylineCoordinates
+				function zoomToObject(obj) {
+					var bounds = new google.maps.LatLngBounds();
+					var points = obj.getPath().getArray();
+					for (var n = 0; n < points.length; n++) {
+						bounds.extend(points[n]);
+					}
+					map.fitBounds(bounds);
+				}
+				flightPath.setMap(map);
+				if (tourPolylineCoordinates.length > 1) {
+					zoomToObject(flightPath);
+				}
 			});
 		}
 	}
+
 	for (var i = 1; i < $(".map").length; i++) {
 		$("#map" + i).hide();
 	}
 	$.get("/band_dashboard.json", function(data) {
 		initialize("map0");
-		data[0][1].forEach(get_marker_without_save);
+		data[0][1].forEach(get_marker);
 
 		$("body").on("click", ".view-map", function(e) {
+			// hide other shown map
+			$('.map').hide();
 			for (var i = 0; i < markers.length; i++) {
 				markers[i].setMap(null);
 			}
 			markers = [];
+			tourPolylineCoordinates = [];
 			var tour_index = $(".view-map").index(this);
 			var mapId = "map" + tour_index;
 			$("#" + mapId).toggle();
