@@ -18,12 +18,24 @@
 
 $(function() {
 	$('body').on('click', '#remove', function(e) {
-		console.log("Clicked!");
-		$(this).parent().parent().parent().remove();
+		// only allow to remove city field if there is more than one
+		if ($(".fields").length > 1) {
+			$(this).parent().parent().parent().remove();
+		} else {
+			// alert when user try to remove the last city field
+			$(this).parent().parent().parent().prepend("<div class='alert alert-danger city-field-alert'>You can't delete all city fields.</div>");
+		}
 	});
+	// set fiels index for cloning with unique index number
+	var setFieldIndex = 2;
 	$("#add").click(function(e) {
-		var clone_form_index = $(".fields").length + 1;
+		$(".city-field-alert").remove();
+		setFieldIndex++;
+		var clone_form_index = setFieldIndex;
 		var new_form = $(".fields").last().clone().attr("class", "fields");
+		// setting all element with new index number
+		new_form.find("input[value='scheduled']").prev().attr("id", "tour_performances_attributes_" + clone_form_index + "_band_id").attr("name", "tour[performances_attributes][" + clone_form_index + "][band_id]");
+		new_form.find("input[value='scheduled']").attr("id", "tour_performances_attributes_" + clone_form_index + "_status").attr("name", "tour[performances_attributes][" + clone_form_index + "][status]");
 		new_form.find("select").addClass("date_input");
 		new_form.find(".location_label").attr("for", "tour_performances_attributes_" + clone_form_index + "_location");
 		new_form.find(".location_input").attr("id", "tour_performances_attributes_" + clone_form_index + "_location").attr("name", "tour[performances_attributes][" + clone_form_index + "][location]").val("");
