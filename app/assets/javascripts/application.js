@@ -19,8 +19,7 @@
 $(function() {
 	$('body').on('click', '#remove', function(e) {
 		console.log("Clicked!");
-		// $(this).prev("input[type=hidden]").value = "1";
-		$(this).hide().prevAll().remove();
+		$(this).parent().parent().parent().remove();
 	});
 	$("#add").click(function(e) {
 		var clone_form_index = $(".fields").length + 1;
