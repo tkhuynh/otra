@@ -312,6 +312,9 @@ label {
 	margin: 0 auto;
 }
 .user {
+	.tour-name {
+		margin-bottom: 15px;
+	}
 	.user-headers {
 		margin-bottom: 0;
 	}
@@ -344,7 +347,7 @@ label {
 
 /*media queries*/
 
-@media (max-width: 768px) and (max-width: 991px) {
+@media (max-width: 991px) {
 	.user {
 		.user-info-wrapper {
 			margin-top: 35px;

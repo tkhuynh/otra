@@ -14,7 +14,7 @@
 						<h4><%= icon('envelope-o') %> <%= @host.email %></h4>
 						<h4>&emsp;<%= icon('map-marker') %> <%= @host.location %></h4> 
 						<% if @host.about == nil and current_user.type == "Host" %>
-							<h4><%= icon('music') %> <%= link_to "Please Update", edit_user_path %></h4>
+							<h4><%= icon('music') %> <%= link_to "Please Update", edit_user_path(current_user) %></h4>
 						<% else %>
 							<h4><%= icon('music') %> <%= @host.about %></h4>
 						<% end %>
@@ -31,8 +31,6 @@
 			</div>
 		</div>
 		<div class="col-md-8">
-			<div class="dashboard-parent">
-		<div class="dashboard-content">
 			<% @host.shows.each do |show| %>
 				<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
 					<div class="shadowbox">
@@ -42,10 +40,9 @@
 						<br>
 						<br>
 						<div class="card-body">
-
-						<div class="flyer">
-							<%= image_tag show.flyer.url(:medium) %>
-						</div>
+							<div class="flyer">
+								<%= image_tag show.flyer.url(:medium) %>
+							</div>
 							<%= show.show_date.strftime("%m/%d/%Y") %> <br> <span><%= show.location %></span>
 							<hr>
 							<%= link_to "View details", show_path(show) %><br>
@@ -56,8 +53,6 @@
 					</div>
 				</div>
 			<% end %>
-		</div>
-	</div>
 		</div>
 	</div>
 </div>
