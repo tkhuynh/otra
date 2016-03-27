@@ -198,16 +198,15 @@ label {
 	padding: 10px 0px 10px 0px;
 }
 
+/*vertically and horizontally center*/
 .login-form-holder {
 	display: flex;
 	justify-content: center;
-	transform-style: preserve-3d;
 }
 .login-form {
 	align-self: center;
 	position: relative;
-	top: 50;
-	transform: translateY(50%);
+	transform: translateY(25%);
 }
 
 .flyer {
@@ -283,8 +282,7 @@ label {
 }
 
 .login-image {
-	height: 500px;
-	margin-top: 100px;
+	margin: 0 auto;
 }
 
 /* show */
@@ -365,6 +363,13 @@ label {
 			margin-top: 35px;
 		}
 	}
+	.login-image {
+		width: 550px;
+	}
+	.login-form {
+		transform: translateY(0%);
+		width: 550px;
+	}
 }
 
 @media (max-width: 415px) and (max-width: 767px) {
@@ -384,5 +389,11 @@ label {
 		h3 {
 			font-size: 14px;
 		}
+	}
+	.login-image {
+		width: 250px;
+	}
+	.login-form {
+		transform: translateY(0%);
 	}
 }
