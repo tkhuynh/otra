@@ -241,9 +241,21 @@ label {
 }
 
 .map {
-	margin-top: 30px !important;
-	margin-bottom: -30px;
+	margin-bottom: -15px;
 	height: 500px;
+}
+
+.view-map {
+	cursor: pointer
+}
+
+.map-headers {
+	font-family: 'modern_sansregular';
+	text-transform: uppercase;
+	color: $otra-offwhite;
+	background-color: $otra-purple;
+	padding: 10px;
+	margin-bottom: 0;
 }
 
 .shadowbox {
