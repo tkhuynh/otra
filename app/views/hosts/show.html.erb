@@ -1,26 +1,32 @@
-<div class="container" id="user">
+<br>
+<div class="container-fluid user">
 	<div class="row">
 		<div class="col-md-4">
-			<div class="user-container">
-				<h2 class="headers"><%= @host.name %></h2>
-				<br>
-				<br>
-				<div class="profile-side-bar">
-					<div class="flyer"  style="border: none">
+			<div class="row">
+				<div class="col-lg-12 col-md-12 col-sm-6 col-xs-6 text-center">
+					<h2 class="headers user-headers"><%= @host.name %></h2>
+					<div class="user-avatar-wrapper">
 						<%= image_tag @host.avatar.url(:medium), class: "img-responsive user-avatar"%>
 					</div>
-					<h4>&emsp;<span class="glyphicon glyphicon-envelope"></span> <%= @host.email %></h4>
-					<h4 class="font">&emsp;<span class="glyphicon glyphicon-globe"></span> <%= @host.location %></h4>
-					<h4 class="font">&emsp;<span class="glyphicon glyphicon-music"></span> 
+				</div>
+				<div class="col-lg-12 col-md-12 col-sm-6 col-xs-6 info_right">
+					<div class="user-info-wrapper">
+						<h4><%= icon('envelope-o') %> <%= @host.email %></h4>
+						<h4>&emsp;<%= icon('map-marker') %> <%= @host.location %></h4> 
 						<% if @host.about == nil and current_user.type == "Host" %>
-							<%= link_to "Please Update", edit_user_path %>
+							<h4><%= icon('music') %> <%= link_to "Please Update", edit_user_path %></h4>
 						<% else %>
-							<%= @host.about %>
+							<h4><%= icon('music') %> <%= @host.about %></h4>
 						<% end %>
 						</h4>
-					<% if current_user.type == "Host" %>
-						<h3>&emsp;<%= link_to "Find Performance", performances_path %></h3>
-					<% end %>
+						<% if current_user.type == "Host" %>
+							<h3>
+								&emsp;<%= link_to performances_path do %>
+									<%= icon('search') %> Find Bands
+								<% end %>
+							</h3>
+						<% end %>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -28,7 +34,7 @@
 			<div class="dashboard-parent">
 		<div class="dashboard-content">
 			<% @host.shows.each do |show| %>
-				<div class="col-xs-4">
+				<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
 					<div class="shadowbox">
 						<h3 class="headers">
 							<%= show.venue %>
