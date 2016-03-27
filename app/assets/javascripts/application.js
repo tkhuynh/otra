@@ -17,6 +17,11 @@
 //= require_tree .
 
 $(function() {
+	$(".menu-toggle").click(function(e) {
+      e.preventDefault();
+      $(this).children().toggleClass("fa-angle-right fa-angle-left");
+      $("#wrapper").toggleClass("toggled");
+    });
 	$('body').on('click', '#remove', function(e) {
 		// only allow to remove city field if there is more than one
 		if ($(".fields").length > 1) {

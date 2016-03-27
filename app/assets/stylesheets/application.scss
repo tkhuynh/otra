@@ -16,6 +16,8 @@
 @import "bootstrap";
 @import "fonts";
 @import "main";
+@import "font-awesome-sprockets";
+@import "font-awesome";
 
 html, body {
 	margin: 0px;
@@ -34,4 +36,152 @@ html, body {
 .thumbnail {
   margin-top: 5px;
   padding: 0;
+}
+
+#wrapper {
+    padding-left: 0;
+}
+
+#wrapper.toggled {
+    padding-left: 250px;
+}
+
+.user-bar-pad {
+	padding: 15px;
+}
+
+#sidebar-wrapper {
+	font-family: 'modern_sansregular';
+  z-index: 1000;
+  position: fixed;
+  left: 250px;
+  width: 0;
+  height: 100%;
+  margin-left: -250px;
+  overflow-y: auto;
+  background-color: #f6f2f9;
+  a {
+		text-decoration: none;
+		color: $otra-purple;
+		&:hover {
+			color: $otra-lightpurple
+		};
+	};
+}
+
+#wrapper.toggled #sidebar-wrapper {
+  width: 250px;
+  box-shadow: 0 0 10px 1px rgba(0,0,0,0.25);
+}
+
+#page-content-wrapper {
+  width: 100%;
+  position: absolute;
+  padding: 15px;
+}
+
+#wrapper.toggled #page-content-wrapper {
+  position: absolute;
+  margin-right: -250px;
+}
+
+/* Sidebar Styles */
+
+.dashboard-content {
+	position: relative;
+}
+
+span.menu-toggle {
+	position: fixed;
+	padding: 3px;
+	top: 50px;
+	left: 0;
+	font-size: 36px;
+	background-color: transparent;
+  padding: 0px 4px 0px 4px;
+  margin-top: 2px;
+  margin-bottom: 2x;
+  cursor: pointer;
+}
+
+#wrapper.toggled span.menu-toggle {
+	left: 250px;
+}
+
+.sidebar-nav {
+  position: absolute;
+  top: 0;
+  width: 250px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sidebar-nav li {
+  text-indent: 20px;
+  line-height: 40px;
+}
+
+.sidebar-nav li a {
+  display: block;
+  text-decoration: none;
+  color: #999999;
+}
+
+.sidebar-nav li a:hover {
+  text-decoration: none;
+  color: #fff;
+  background: rgba(255,255,255,0.2);
+}
+
+.sidebar-nav li a:active,
+.sidebar-nav li a:focus {
+  text-decoration: none;
+}
+
+.sidebar-nav > .sidebar-brand {
+  height: 65px;
+  font-size: 18px;
+  line-height: 60px;
+}
+
+.sidebar-nav > .sidebar-brand a {
+  color: #999999;
+}
+
+.sidebar-nav > .sidebar-brand a:hover {
+  color: #fff;
+  background: none;
+}
+
+@media(min-width:768px) {
+	span.menu-toggle {
+		display: none;
+	}
+  #wrapper {
+      padding-left: 250px;
+  }
+
+  #wrapper.toggled {
+      padding-left: 0;
+  }
+
+  #sidebar-wrapper {
+    width: 250px;
+    box-shadow: 0 0 10px 1px rgba(0,0,0,0.25);
+  }
+
+  #wrapper.toggled #sidebar-wrapper {
+      width: 0;
+  }
+
+  #page-content-wrapper {
+      padding: 20px;
+      position: relative;
+  }
+
+  #wrapper.toggled #page-content-wrapper {
+      position: relative;
+      margin-right: 0;
+  }
 }

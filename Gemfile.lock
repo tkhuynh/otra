@@ -69,6 +69,8 @@ GEM
     dotenv (2.1.0)
     erubis (2.7.0)
     execjs (2.6.0)
+    font-awesome-sass (4.5.0)
+      sass (>= 3.2)
     geocomplete_rails (1.6.5)
       railties (>= 3.1)
     globalid (0.3.6)
@@ -177,6 +179,7 @@ DEPENDENCIES
   byebug
   coffee-rails (~> 4.1.0)
   dotenv (~> 2.1)
+  font-awesome-sass (~> 4.5.0)
   geocomplete_rails
   jbuilder (~> 2.0)
   jquery-rails
