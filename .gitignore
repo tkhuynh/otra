@@ -12,9 +12,8 @@
 !/log/.keep
 /tmp
 
-# Ignore byebug
-.byebug_history
-
 .env
+/public/system/*
+/public/assets/*
 
-/public/assets
+.byebug_history

@@ -1,43 +1,52 @@
-<div class="col-xs-3" style="
-    margin-left: -15px;" >
-	<div class="user-sidebar shadowbox">
+<div id="wrapper">
+	<!-- Sidebar -->
+	<div id="sidebar-wrapper">
 		<h1 class="headers"><%= @host.name %></h1>
-		<div class="img-rounded">
-			<%= image_tag @host.avatar.url(:medium), class: "img-responsive avatar image-resize"%>
-		</div>
-		<div class="user-bar-pad">
-			<br>
-			<%= @host.email %><br>
-			<%= @host.location %><br><br>
-			<h3><%= link_to "Add Show", new_show_path %></h3>
-			<h3><%= link_to "Find Bands", performances_path %></h3>
-		</div>
+			<div class="img-rounded">
+				<%= image_tag @host.avatar.url(:medium), class: "img-responsive avatar image-resize" %>
+			</div>
+			<div class="user-bar-pad">
+				<p>
+					<%= icon('envelope-o') %> <%= @host.email %>
+					<br><%= icon('map-marker') %> <%= @host.location %>
+				</p>
+				<h3><%= link_to "Add Show", new_show_path %></h3>
+				<h3><%= link_to "Find Bands", performances_path %></h3>
+			</div>
 	</div>
-</div>
-<div class="col-xs-9">
-	<div class="dashboard-parent">
-		<div class="dashboard-content">
-			<% @host.shows.each do |show| %>
-				<div class="col-xs-4">
-					<div class="shadowbox">
-						<h3 class="headers">
-							<%= show.venue %>
-						</h3>
-						<br>
-						<br>
-						<div class="card-body">
-
-						<div class="flyer">
-							<%= image_tag show.flyer.url(:medium) %>
+	<!-- /#sidebar-wrapper -->
+	<!-- Page Content -->
+	<div id="page-content-wrapper">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-lg-12 dashboard-content">
+					<span class="menu-toggle">
+						<%= icon('angle-right') %>
+					</span>
+					<% @host.shows.each do |show| %>
+						<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+							<div class="shadowbox">
+								<h3 class="headers">
+									<%= show.venue %>
+								</h3>
+								<br>
+								<br>
+								<div class="card-body">
+									<div class="flyer">
+										<%= link_to image_tag(show.flyer.url(:medium)), show_path(show), class: "img-responsive" %>
+									</div>
+									<span><%= show.location %></span>
+									<p><%= show.show_date.strftime("%m/%d/%Y") %></p>
+									<hr>
+									<%= link_to "View details", show_path(show) %><br>
+									<%= link_to "Edit", edit_show_path(show) %>
+								</div>
+							</div>
 						</div>
-							<%= show.show_date.strftime("%m/%d/%Y") %> <br> <span><%= show.location %></span>
-							<hr>
-							<%= link_to "View details", show_path(show) %><br>
-							<%= link_to "Edit", edit_show_path(show) %>
-						</div>
-					</div>
+					<% end %>
 				</div>
-			<% end %>
+			</div>
 		</div>
 	</div>
+	<!-- /#page-content-wrapper -->
 </div>
