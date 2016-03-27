@@ -46,6 +46,13 @@ hr{
 	margin-top: 3px;
 }
 
+button.navbar-toggle.collapsed {
+	background-color: $otra-offwhite;
+	border-color: #4e2b49;
+}
+button.navbar-toggle.collapsed:hover {
+	background-color: $otra-offwhite;
+}
 
 .dropdown-menu {
 	background-color: $otra-lightpurple;
