@@ -143,7 +143,7 @@ button.navbar-toggle.collapsed, button.navbar-toggle, .navbar-default .navbar-to
 	font-family: 'modern_sansregular'
 }
 
-a.down-arrow, , a#add, a#remove {
+a.down-arrow, , a#add, a.remove {
 	text-decoration: none;
 	color: $otra-purple;
 }
@@ -221,23 +221,30 @@ label, .login-signup-footer {
 }
 
 .fields {
-	background-color: #f7f7f7;	
+	background-color: #f7f7f7;
+	border: 1px solid $otra-purple;
 	margin-top: 10px;
-	padding: 10px 0px 10px 0px;
+	padding: 10px;
 }
 
 /*vertically and horizontally center*/
-.login-form-holder, .signup-form-holder {
+.login-form-holder, .signup-form-holder, .new-tour-holder {
 	display: flex;
 	justify-content: center;
 }
+
 .login-form {
 	align-self: center;
 	position: relative;
 	transform: translateY(25%);
 }
-.signup-form {
+.signup-form, .new-tour-form {
 	width: 700px;
+}
+
+.new-tour-inner-form {
+	width: 600px;
+	margin: 0 auto;
 }
 
 .flyer {
@@ -344,6 +351,10 @@ label, .login-signup-footer {
   border-radius: 0px;
 }
 
+.city-field-alert {
+	border-radius: 0px;
+	margin-top: 0px;
+}
 /* user profile */
 .user-avatar-wrapper {
 	background-color: #7d7187;
@@ -419,6 +430,12 @@ label, .login-signup-footer {
 	.signup-form {
 		width: 550px;
 	}
+	.new-tour-form {
+		width: 500px;
+	}
+	.new-tour-inner-form {
+		width: 400px;
+	}
 }
 
 @media (max-width: 415px) and (max-width: 767px) {
@@ -465,5 +482,11 @@ label, .login-signup-footer {
 		p {
 			font-size: 45px;
 		}
+	}
+	.new-tour-form {
+		width: 350px;
+	}
+	.new-tour-inner-form {
+		width: 250px;
 	}
 }

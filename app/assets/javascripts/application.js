@@ -22,14 +22,17 @@ $(function() {
       $(this).children().toggleClass("fa-angle-right fa-angle-left");
       $("#wrapper").toggleClass("toggled");
     });
-	$('body').on('click', '#remove', function(e) {
+	$('body').on('click', '.remove', function(e) {
 		// only allow to remove city field if there is more than one
 		if ($(".fields").length > 1) {
-			$(this).parent().parent().parent().remove();
+			$(this).parent().remove();
 		} else {
 			// alert when user try to remove the last city field
-			$(this).parent().parent().parent().prepend("<div class='alert alert-danger city-field-alert'>You can't delete all city fields.</div>");
+			if ($(this).parent().find(".city-field-alert").length === 0) {
+				$(this).parent().prepend("<div class='alert alert-danger city-field-alert'><a href='#' class='close' data-dismiss='alert' aria-label='close' title='close'>×</a>You can't delete all city fields.</div>");
+			}
 		}
+		e.preventDefault();
 	});
 	// set fiels index for cloning with unique index number
 	var setFieldIndex = 2;
