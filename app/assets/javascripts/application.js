@@ -84,6 +84,7 @@ $(function() {
 			center: center,
 			zoom: 4,
 			mapTypeId: google.maps.MapTypeId.ROADMAP,
+			draggable: false,
 			scrollwheel: false
 		});
 	}

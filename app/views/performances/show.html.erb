@@ -1,7 +1,7 @@
 <div class="container">
 	<div class="row">
 		<div class="show-wrapper">
-			<div class="col-xs-6">
+			<div class="col-lg-12 col-md-12">
 				<h1 class="headers"><%= @performance.band.name %></h1>
 				<br>
 				<br>
@@ -9,11 +9,14 @@
 					<h3><strong>Tour Name: </strong><%= @performance.tour.name %></h3>
 					<h3><strong>Location: </strong><%= @performance.location %></h3>
 					<h4><strong>Date: </strong><%= @performance.performance_date %></h4>
-					<h4><strong>Band Home City: </strong><%= @performance.band.location %></h4>
+					<% if current_user.type === "Host" %>
+						<h4><strong>Band Home City: </strong><%= @performance.band.location %></h4>
+					<% end %>
 					<% if @confirmed_request %>
 						<p><strong>Venue: </strong><%= @confirmed_request.show.venue %> - <%=  @performance.location %></p>
+						<%= image_tag @confirmed_request.show.flyer.url(:medium), class: "band-confirmed-venue" %>
 					<% end %>
-					<% if current_user.type == "Host" and @host_request.empty? %>
+					<% if current_user.type == "Host" and @host_request.empty? and @request_band_made_to_host.empty? %>
 						<%= form_for @request do |f| %>
 							<%= f.hidden_field :status, value: "pending" %>
 							<%= f.hidden_field :requester_id, value: current_user.id %>
@@ -25,15 +28,20 @@
 					<% end %>
 				</div>
 			</div>
-			<div class="col-xs-6">
+			<div class="col-lg-12 col-md-12">
 				<% if @pending_requests.any? %>
 					<h1 class="headers">Pending Requested Hosts</h1>
 					<br>
 					<br>
 					<% @pending_requests.each do |request| %>
-						<% if current_user == Host %>
+						<% if current_user.type == "Host" %>
 							<div class="card-body">
-								<%= request.show.host.name %>
+								<% if current_user.id == request.show.host.id %>
+									You have a pending request from <%= @performance.band.name %>
+									<br><%= link_to "Click Here", show_path(request.show) %> to see request.
+								<% else %>
+									<%= request.show.host.name %>
+								<% end %>
 							</div>
 						<% end %>
 						<% pending_performance = request.performance %>

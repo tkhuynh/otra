@@ -23,6 +23,7 @@ class PerformancesController < ApplicationController
     if current_user
       if current_user.type == "Host" and @match_performances.any? {|performance| performance = @performance}
         @host_request = Request.where({requester_id: current_user.id, performance_id: @performance.id})
+        @request_band_made_to_host = Request.where({requester_id: @performance.band.id, performance_id: @performance.id})
         @performance
       elsif current_user.type == "Band" and current_user.id == @performance.band_id
         @performance
@@ -91,7 +92,6 @@ private
     if current_user and current_user.type == "Host"
       @host_matched_performances = Performance.where({status: "scheduled", location: current_user.location})
       @match_performances = []
-      # byebug
       current_user.shows.each do |show|
         match_performances = @host_matched_performances.where({ performance_date: show.show_date}).group_by {|performance| performance.performance_date}
         if match_performances.any?
