@@ -11,7 +11,7 @@ body {
 	background-color: $otra-offwhite;
 }
 
-hr{
+hr {
    border: 1px solid $otra-purple;
 }
 
@@ -63,17 +63,28 @@ button.navbar-toggle.collapsed, button.navbar-toggle, .navbar-default .navbar-to
 }
 
 /*homepage*/
-
+.otra-holder {
+	padding: 0;
+}
 .logo {
 	height: 250px;
 }
 
 .logo-info {
-	display: block;
 	margin: 0 auto;
 }
 
-.tagline {
+.divider-line {
+	border: 1px solid $otra-purple;
+	max-width: 375px;
+}
+
+.tagline-wrapper {
+	margin: 0 auto;
+	max-width: 375px;
+}
+
+.tagline, p.otra  {
 	font-size: 75px;
 }
 
@@ -90,7 +101,6 @@ button.navbar-toggle.collapsed, button.navbar-toggle, .navbar-default .navbar-to
 }
 
 .info {
-	padding: 20px 0px 20px 20px;
 	color: $otra-purple;
 	font-family: 'modern_sansregular';
 	font-size: 100px;
@@ -99,23 +109,28 @@ button.navbar-toggle.collapsed, button.navbar-toggle, .navbar-default .navbar-to
 
 .info-header {
 	margin-top: 30px;
-	word-spacing: -32px;
+	word-spacing: -40px;
 }
 
-.band-how-it-works {
-	height: 600px;
-	padding-top: 50px;
-	padding-left: 40px;
+.how-it-works {
+	padding: 30px 0px 20px 0px;
 	background-color: $otra-lightpink;
 	color: $otra-purple;
 	font-family: 'modern_sansregular';
-	a {
+	a, p.host-signup, p.band-signup {
+		cursor: pointer;
 		text-decoration: none;
 		color: $otra-purple;
 		&:hover {
 			color: $otra-lightpurple;
 		};
 	};
+	img.band-signup, img.host-signup {
+		cursor: pointer;
+	}
+	h4 {
+		text-align: left;
+	}
 
 }
 
@@ -167,11 +182,15 @@ a.band-signup, a.host-signup {
 	border-color: none;
 }
 
-input.form-control {
+input.form-control, select.form-control, select.form-control option {
 	border-radius: 0;
 }
+select.form-control {
+	-webkit-appearance: none;
+	background: url(https://upload.wikimedia.org/wikipedia/commons/f/f7/Arrow-down-navmenu.png) no-repeat right;
+}
 
-label {
+label, .login-signup-footer {
 	color: $otra-purple;
 	font-family: 'modern_sansregular';
 }
@@ -192,6 +211,15 @@ label {
   margin-top: 2em;
 }
 
+.login-signup-footer a {
+	color: #8e7b61;	
+	text-decoration: none;
+}
+.login-signup-footer a:hover {
+	color: #B3A48F;
+	text-decoration: none;
+}
+
 .fields {
 	background-color: #f7f7f7;	
 	margin-top: 10px;
@@ -199,7 +227,7 @@ label {
 }
 
 /*vertically and horizontally center*/
-.login-form-holder {
+.login-form-holder, .signup-form-holder {
 	display: flex;
 	justify-content: center;
 }
@@ -207,6 +235,9 @@ label {
 	align-self: center;
 	position: relative;
 	transform: translateY(25%);
+}
+.signup-form {
+	width: 700px;
 }
 
 .flyer {
@@ -370,6 +401,24 @@ label {
 		transform: translateY(0%);
 		width: 550px;
 	}
+	.tagline {
+		font-size: 55px;
+	}
+	p.otra {
+		font-size: 45px;
+	}
+	.info h3 {
+		font-size: 20px;
+	}
+	.info-header {
+		word-spacing: -30px;
+		p {
+			font-size: 80px;
+		}
+	}
+	.signup-form {
+		width: 550px;
+	}
 }
 
 @media (max-width: 415px) and (max-width: 767px) {
@@ -395,5 +444,26 @@ label {
 	}
 	.login-form {
 		transform: translateY(0%);
+	}
+	.tagline {
+		font-size: 45px;
+	}
+	.welcome {
+		margin-top: -35px;
+	}
+	.logo {
+		height: 200px;
+	}
+	p.otra {
+		font-size: 30px;
+	}
+	.info h3 {
+		font-size: 18px;
+	}
+	.info-header {
+		word-spacing: -20px;
+		p {
+			font-size: 45px;
+		}
 	}
 }

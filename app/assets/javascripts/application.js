@@ -174,12 +174,12 @@ $(function() {
 	$(".tab-pane").first().addClass("in active");
 
 	// signup form
-	$(".host-signup").click(function(e) {
-		$("#signup").show();
-		$("#role").val("Host");
+	$("p.host-signup, img.host-signup").click(function(e) {
+		$("select.form-control").val("Host");
+		$("input#user_name").focus();
 	});
-	$(".band-signup").click(function(e) {
-		$("#signup").show();
-		$("#role").val("Band");
+	$("p.band-signup, img.band-signup").click(function(e) {
+		$("select.form-control").val("Band");
+		$("input#user_name").focus();
 	});
 });

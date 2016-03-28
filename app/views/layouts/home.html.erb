@@ -1,97 +1,52 @@
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-md-12" style="padding: 0">
+		<div class="col-lg-12 otra-holder">
 			<div class="welcome text-center"><br><br><br>
 				<%= image_tag "otra-01.png", class: "logo" %>
-				<div class="tagline">
-					On the road again?
-				</div>
+				<p class="otra">On the road again?</p>
 				<br>
 			</div>
 		</div>
 	</div>
 
 	<div class="row">
-		<div class="col-md-10 col-md-offset-1">
+		<div class="col-lg-10 col-lg-offset-1 text-center">
 			<div class="info text-center">
 				<hr>
 				<div class="info-header">
-					LET US DO SOME HEAVY LIFTING
+					<p>LET US DO SOME HEAVY LIFTING</p>
 				</div>
 				<hr>
 				<h3>Otra provides a platform for touring bands and independent show hosts to connect efficiently and painlessly</h3>
-				<a class="glyphicon glyphicon-chevron-down down-arrow" href="#how-it-work"></a>
-				<br>
+				<p><a href="#how-it-work" class="down-arrow"><%= icon('angle-down') %></a></p>
 			</div>
 		</div>
 	</div>
 
 	<section id="how-it-work">
-		<div class="row">
-			<div class="band-how-it-works">
-				<div class="col-md-4 col-md-offset-1">
-					<%= image_tag "otraband-01.png", class: "logo logo-info" %>
-					<hr>
-					<div class="tagline image-labels text-center"><a href="#signup", class="band-signup">BANDS</a></div>
-					<hr>
+		<div class="row how-it-works">
+			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-center">
+				<div class="tagline-wrapper">
+					<%= image_tag "otraband-01.png", class: "logo-info img-responsive" %>
+					<hr class="divider-line">
+					<%= link_to "BANDS", signup_path, class: "tagline image-labels band-signup" %>
+					<hr class="divider-line">
 					<% if !current_user %>
-						<h4><strong><a href="#signup", class="band-signup">Signup</a></strong> as a band and get started by creating a tour route and connecting with hosts!</h4>
+						<h4><strong><%= link_to "Signup", signup_path, class: "band-signup" %></strong> as a band and get started by creating a tour route and connecting with hosts!</h4>
 					<% end %>
 				</div>
-				<div class="col-md-4 col-md-offset-1">
-					<%= image_tag "otrahosts-01.png", class: "logo logo-info" %>
-					<hr>
-					<div class="tagline image-labels text-center"><a href="#signup", class="host-signup">HOSTS</a></div>
-					<hr>
+			</div>
+			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-center">
+				<div class="tagline-wrapper">
+					<%= image_tag "otrahosts-01.png", class: "logo-info img-responsive" %>
+					<hr class="divider-line">
+					<%= link_to "HOSTS", signup_path, class: "tagline image-labels host-signup" %>
+					<hr class="divider-line">
 					<% if !current_user %>
-						<h4><strong><a href="#signup", class="host-signup">Signup</a></strong> as a host and get started by creating some shows and connecting with bands!</h4>
+						<h4><strong><%= link_to "Signup", signup_path, class: "host-signup" %></strong> as a host and get started by creating some shows and connecting with bands!</h4>
 					<% end %>
 				</div>
 			</div>
 		</div>
 	</section>
-
-	<% if !current_user %>
-		<section id="signup" hidden>
-			<div class="row">
-				<div class="col-xs-6 col-xs-offset-3">
-					<div class="signup-form">
-						<h3 class="text-center form-title">Get Started</h3>
-						<div class="row">
-							<div class="col-xs-10 col-xs-offset-1">
-								<%= form_for :user, url: users_path, method: :post, html: { multipart: true } do |f| %>
-								<div class="form-group">
-									<%=  f.label :name %>
-									<%=  f.text_field :name, class: "form-control", autofocus: true %>
-								</div>
-								<div class="form-group">
-									<%=  f.label :email %>
-									<%=  f.email_field :email, class: "form-control" %>
-								</div>
-								<div class="form-group">
-									<%=  f.label :location %>
-									<%=  f.text_field :location, class: "form-control city_stops" %>
-								</div>
-								<div class="form-group">
-									<%=  f.hidden_field :type, id: "role" %>
-								</div>
-								<div class="form-group">
-									<%=  f.label :password %>
-									<%=  f.password_field :password, class: "form-control" %>
-								</div>
-								<div class="form-group">
-									<%=  f.label :password_confirmation %>
-									<%=  f.password_field :password_confirmation, class: "form-control" %>
-								</div>
-								<div class="form-group text-center">
-									<%= f.submit "Sign Up", class: "btn btn-primary form-control" %>
-								</div>
-							<% end %>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-	<% end %>
 </div>
