@@ -49,6 +49,13 @@ class ShowsController < ApplicationController
     end
     if current_user
       if current_user.type == "Band" and @match_shows.any? {|show| show = @show}
+        @confirmed_performance_requests = Request.where({show_id: @show.id, status: "confirmed"})
+        @band_had_a_performance_slot_here = false
+        @confirmed_performance_requests.each do |req|
+          if Performance.find(req.performance_id).band.id == current_user.id
+            @band_had_a_performance_slot_here = true
+          end
+        end
         host_requests_for_band = Request.where({requester_id: @show.host.id, show_id: @show.id, status: "pending"})
         @host_single_request = host_requests_for_band.select { |hostreq| hostreq.performance.band_id == current_user.id }
         @band_pending_request = @pending_requests.where(requester_id: current_user.id)

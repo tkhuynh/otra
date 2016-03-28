@@ -22,7 +22,7 @@
 					<% end %>
 						<% if @show.slots > @confirmed_requests.count and current_user.type == "Band" and @band_denied_request.empty? and @band_pending_request.empty? %>
 							<!-- if host hasn't requested band -->
-							<% if @host_single_request.empty? %>
+							<% if @host_single_request.empty? and @band_had_a_performance_slot_here == false %>
 								<%= form_for @request do |f| %>
 									<%= f.hidden_field :status, value: "pending" %>
 									<%= f.hidden_field :requester_id, value: current_user.id %>
@@ -31,7 +31,7 @@
 									<%= f.hidden_field :show_id, value: @show.id %>
 									<%= f.submit "Request Slot", class: "btn btn-primary" %>
 								<% end %>
-						<% else %>
+						<% elsif !@host_single_request.empty? and @band_had_a_performance_slot_here == false %>
 							Host already wants you to play this show, <br>
 							<%= link_to "click here", performance_path(@host_single_request[0].performance_id), class: "btn btn-primary", style: "color: #F9F7DC" %> to confirm or deny!
 						<% end %>
@@ -59,12 +59,7 @@
 										<% end %>
 									<% end %>
 								<% elsif current_user.type == "Band" %>
-									<% if current_user.id == request.performance.band.id %>
-										You have a pending request with this venue.
-										<br><%= link_to "Click Here", performance_path(request.performance) %> to see details.
-									<% else %>
-										<%= request.performance.band.name %>
-									<% end %>
+									<%= request.performance.band.name %>
 								<% end %>
 							</div>
 						<% end %>
